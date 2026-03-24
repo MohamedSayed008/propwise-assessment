@@ -40,7 +40,17 @@ export default function RootLayout({
       <body className="min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
-          <Toaster position="bottom-right" />
+          <Toaster
+            position="bottom-right"
+            gap={8}
+            toastOptions={{
+              className: "!rounded-full !px-4 !py-2.5 !text-sm !font-medium !shadow-dropdown !border-0",
+              style: {
+                background: "var(--bg-inverted)",
+                color: "var(--content-inverted)",
+              },
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

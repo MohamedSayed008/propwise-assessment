@@ -60,7 +60,7 @@ function NavLink({ item }: { item: NavItem }) {
           "flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
           item.active
             ? "border-l-[3px] border-[var(--color-brand-500)] bg-[var(--color-brand-50)] text-[var(--color-brand-600)] pl-[9px]"
-            : "text-[var(--content-subtle)] hover:bg-[var(--bg-subtle)] hover:text-[var(--content-default)]"
+            : "text-[var(--content-default)] hover:bg-[var(--bg-subtle)]"
         )}
       >
         <item.icon className="h-4 w-4 shrink-0" />
@@ -78,16 +78,19 @@ function SidebarContent() {
     <div className="flex h-full flex-col">
       {/* User section */}
       <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] px-4 py-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-brand-500)] text-sm font-semibold text-white">
-          LR
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://i.pravatar.cc/40?u=lina-rahman"
+          alt="Lina Rahman"
+          className="h-10 w-10 rounded-full object-cover"
+        />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
             <span className="text-sm font-semibold text-[var(--content-emphasis)] truncate">
               Lina Rahman
             </span>
-            <span className="inline-flex items-center rounded-full bg-[var(--bg-success)] px-1.5 py-0.5 text-[10px] font-semibold text-[var(--content-success)]">
-              PRO
+            <span className="inline-flex items-center rounded bg-[var(--color-brand-100)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--color-brand-600)]">
+              Pro
             </span>
           </div>
           <p className="text-xs text-[var(--content-subtle)] truncate">Atlas Estates</p>
@@ -97,20 +100,25 @@ function SidebarContent() {
 
       {/* Search */}
       <div className="px-3 py-3">
-        <div className="flex items-center gap-2 rounded-md border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3 py-1.5">
+        <div className="flex items-center gap-2 rounded-md border border-[var(--border-subtle)] bg-[var(--bg-default)] px-3 py-1.5">
           <Search className="h-4 w-4 text-[var(--content-muted)]" />
           <span className="flex-1 text-sm text-[var(--content-muted)]">Search</span>
-          <kbd className="hidden rounded border border-[var(--border-default)] bg-[var(--bg-default)] px-1.5 py-0.5 text-[10px] text-[var(--content-muted)] sm:inline-block">
-            ⌘ K
-          </kbd>
+          <div className="flex items-center gap-0.5">
+            <kbd className="rounded border border-[var(--border-default)] bg-[var(--bg-subtle)] px-1 py-0.5 text-[10px] text-[var(--content-muted)]">
+              ⌘
+            </kbd>
+            <kbd className="rounded border border-[var(--border-default)] bg-[var(--bg-subtle)] px-1 py-0.5 text-[10px] text-[var(--content-muted)]">
+              K
+            </kbd>
+          </div>
         </div>
       </div>
 
-      {/* Dashboard link */}
+      {/* Dashboard link — active page state: blue icon + text */}
       <nav className="flex-1 overflow-y-auto px-3">
         <ul className="space-y-1">
           <li>
-            <button className="flex w-full items-center gap-3 rounded-md bg-[var(--bg-subtle)] px-3 py-2 text-sm font-semibold text-[var(--content-emphasis)]">
+            <button className="flex w-full items-center gap-3 rounded-md bg-[var(--color-brand-50)] px-3 py-2 text-sm font-semibold text-[var(--color-brand-600)]">
               <LayoutDashboard className="h-4 w-4" />
               Dashboard
             </button>
@@ -118,7 +126,7 @@ function SidebarContent() {
         </ul>
 
         {/* CRM group */}
-        <div className="mt-6">
+        <div className="mt-5">
           <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--content-muted)]">
             CRM
           </p>
@@ -130,7 +138,7 @@ function SidebarContent() {
         </div>
 
         {/* Workspace group */}
-        <div className="mt-6">
+        <div className="mt-5">
           <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--content-muted)]">
             Workspace
           </p>
@@ -152,7 +160,7 @@ function SidebarContent() {
         {/* Theme toggle */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="mt-2 flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-[var(--content-subtle)] hover:bg-[var(--bg-subtle)] hover:text-[var(--content-default)] transition-colors"
+          className="mt-2 flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-[var(--content-subtle)] hover:bg-[var(--bg-subtle)] transition-colors"
         >
           {theme === "dark" ? (
             <Sun className="h-4 w-4" />

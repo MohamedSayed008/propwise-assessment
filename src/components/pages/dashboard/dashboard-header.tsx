@@ -1,5 +1,6 @@
 "use client";
 
+import { Bell } from "lucide-react";
 import { toast } from "sonner";
 
 export function DashboardHeader() {
@@ -13,12 +14,25 @@ export function DashboardHeader() {
           Here&apos;s your pipeline health and sales activity at a glance.
         </p>
       </div>
-      <button
-        onClick={() => toast("Feature coming soon")}
-        className="rounded-lg bg-[var(--color-brand-500)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--color-brand-600)]"
-      >
-        + Create
-      </button>
+      <div className="flex items-center gap-3">
+        {/* Notification bell */}
+        <button
+          className="relative rounded-md p-2 text-[var(--content-subtle)] hover:bg-[var(--bg-subtle)] transition-colors"
+          aria-label="Notifications"
+        >
+          <Bell className="h-5 w-5" />
+          <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+            2
+          </span>
+        </button>
+        {/* Create button */}
+        <button
+          onClick={() => toast("Feature coming soon")}
+          className="flex items-center gap-1.5 rounded-lg bg-[var(--color-brand-500)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--color-brand-600)]"
+        >
+          + Create
+        </button>
+      </div>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export function PipelineSummary() {
         <Skeleton className="mt-2 h-3 w-48" />
         <div className="mt-4 space-y-4">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-6 w-full" />
+            <Skeleton key={i} className="h-8 w-full" />
           ))}
         </div>
       </div>
@@ -52,27 +52,24 @@ export function PipelineSummary() {
         {pipeline.stages.map((stage) => {
           const widthPct = maxValue > 0 ? (stage.value / maxValue) * 100 : 0;
           return (
-            <div key={stage.stage} className="space-y-1">
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-[var(--content-default)]">
-                    {stage.stage}
-                  </span>
-                  <span className="inline-flex items-center justify-center rounded-full bg-[var(--bg-subtle)] px-2 py-0.5 text-xs font-medium text-[var(--content-subtle)]">
+            <div key={stage.stage} className="flex items-center gap-3">
+              <span className="w-20 shrink-0 text-sm font-medium text-[var(--content-default)]">
+                {stage.stage}
+              </span>
+              <div className="relative h-8 flex-1 overflow-hidden rounded-md bg-[var(--bg-subtle)]">
+                <motion.div
+                  className="absolute inset-y-0 left-0 flex items-center gap-2 rounded-md bg-[var(--color-brand-900)] px-3 dark:bg-[var(--color-brand-400)]"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${Math.max(widthPct, 15)}%` }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <span className="rounded bg-white/20 px-1.5 py-0.5 text-xs font-semibold text-white">
                     {stage.count}
                   </span>
-                </div>
-                <span className="text-xs text-[var(--content-subtle)]">
-                  {formatValue(stage.value, stage.currency)}
-                </span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--bg-subtle)]">
-                <motion.div
-                  className="h-full rounded-full bg-[var(--color-brand-500)]"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${widthPct}%` }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                />
+                  <span className="truncate text-xs font-medium text-white/90">
+                    {formatValue(stage.value, stage.currency)}
+                  </span>
+                </motion.div>
               </div>
             </div>
           );
