@@ -1,23 +1,25 @@
-"use client";
+'use client';
 
-import { useAtomValue } from "jotai";
-import { revenueAtom, dashboardLoadingAtom } from "@/store";
-import { TrendingUp } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useAtomValue } from 'jotai';
+import { dashboardLoadingAtom, revenueAtom } from '@/store';
+import { ArrowUpRight, TrendingUp } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
 function formatAxisValue(value: number): string {
   if (value >= 1000) return `AED ${Math.round(value / 1000)}K`;
-  return `AED ${value}`;
+  return `AED ${value}K`;
 }
+
+const revenueTicks = [0, 60000, 120000, 180000, 240000];
 
 export function RevenueForecast() {
   const revenue = useAtomValue(revenueAtom);
@@ -25,62 +27,68 @@ export function RevenueForecast() {
 
   if (loading || !revenue) {
     return (
-      <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-default)] p-6 shadow-xs">
+      <div className="rounded-lg border border-edge-subtle bg-surface px-5 py-4 shadow-xs">
         <Skeleton className="h-4 w-32" />
         <Skeleton className="mt-3 h-8 w-48" />
-        <Skeleton className="mt-4 h-[200px] w-full" />
+        <Skeleton className="mt-4 h-52 w-full" />
       </div>
     );
   }
 
   return (
-    <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-default)] p-6 shadow-xs">
+    <div className="rounded-lg border border-edge-subtle bg-surface px-5 py-4 shadow-xs">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-semibold text-[var(--content-emphasis)]">
+        <h2 className="text-sm font-normal text-content-subtle">
           Revenue Forecast
         </h2>
-        <button className="text-sm font-medium text-[var(--color-brand-500)] hover:underline">
-          Report &rarr;
+        <button className="inline-flex items-center gap-1 text-xs font-semibold text-brand-500 hover:opacity-80">
+          <span>Report</span>
+          <ArrowUpRight className="size-3" strokeWidth={2.25} />
         </button>
       </div>
 
       {/* Value + Trend */}
-      <div className="mt-2">
-        <p className="font-heading text-[28px] font-extrabold leading-7 tracking-[0.01em] text-[var(--content-emphasis)]">
+      <div className="mt-1 flex flex-wrap items-end gap-2.5">
+        <p className="font-heading text-heading-lg font-bold leading-7 tracking-tight text-content-emphasis">
           {revenue.total}
         </p>
-        <div className="mt-2 flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
-            <TrendingUp className="h-3 w-3" />
-            +{revenue.trend}%
+        <div className="flex items-end gap-1">
+          <span className="inline-flex items-center gap-0.5 rounded-full bg-kpi-trend-bg px-1 py-0.5 text-2xs font-semibold text-sparkline">
+            <TrendingUp className="size-2.5" strokeWidth={2.25} />+
+            {revenue.trend}%
           </span>
-          <span className="text-xs text-[var(--content-subtle)]">vs last year</span>
+          <span className="pb-0.5 text-xs text-content-muted">
+            vs last year
+          </span>
         </div>
       </div>
 
       {/* Legend */}
-      <div className="mt-4 flex items-center gap-4 text-xs text-[var(--content-subtle)]">
+      <div className="mt-4 flex items-center gap-5 text-2xs text-content-default">
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-0.5 w-4 rounded bg-[var(--color-brand-500)]" />
+          <span className="inline-block h-0.75 w-3 rounded-full bg-brand-500" />
           This year
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="inline-block h-0.5 w-4 rounded border-t-2 border-dashed border-[var(--border-default)]" />
+        <span className="flex items-center gap-1.5 text-content-subtle">
+          <span className="inline-block h-0.75 w-3 rounded-full bg-edge" />
           Last year
         </span>
       </div>
 
       {/* Chart */}
-      <div className="mt-4 h-[200px]">
+      <div className="mt-3 h-52">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={revenue.data}>
+          <AreaChart
+            data={revenue.data}
+            margin={{ top: 6, right: 0, bottom: 10, left: 8 }}
+          >
             <defs>
               <linearGradient id="thisYearGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="0%"
                   stopColor="var(--color-brand-500)"
-                  stopOpacity={0.2}
+                  stopOpacity={0.12}
                 />
                 <stop
                   offset="100%"
@@ -90,7 +98,7 @@ export function RevenueForecast() {
               </linearGradient>
             </defs>
             <CartesianGrid
-              strokeDasharray="0"
+              strokeDasharray="2 3"
               vertical={false}
               stroke="var(--border-subtle)"
             />
@@ -98,40 +106,60 @@ export function RevenueForecast() {
               dataKey="month"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "var(--content-muted)" }}
+              tick={{ fontSize: 11, fill: 'var(--content-muted)' }}
+              dy={8}
             />
             <YAxis
               axisLine={false}
               tickLine={false}
               tickFormatter={formatAxisValue}
-              tick={{ fontSize: 12, fill: "var(--content-muted)" }}
-              width={50}
+              tick={{ fontSize: 11, fill: 'var(--content-muted)' }}
+              width={56}
+              ticks={revenueTicks}
+              domain={[0, 240000]}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "var(--bg-default)",
-                border: "1px solid var(--border-subtle)",
-                borderRadius: "8px",
-                fontSize: "12px",
+                backgroundColor: 'var(--bg-default)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '8px',
+                fontSize: '12px',
+                boxShadow: 'var(--shadow-sm)',
               }}
-              formatter={(value) => [`AED ${Number(value).toLocaleString()}`, ""]}
+              cursor={{
+                stroke: 'var(--border-subtle)',
+                strokeDasharray: '2 3',
+              }}
+              formatter={value => [`AED ${Number(value).toLocaleString()}`, '']}
             />
             <Area
               type="monotone"
               dataKey="thisYear"
               stroke="var(--color-brand-500)"
-              strokeWidth={2}
+              strokeWidth={2.25}
               fill="url(#thisYearGrad)"
               name="This year"
+              animationDuration={1000}
+              animationEasing="ease-out"
+              dot={false}
+              activeDot={{
+                r: 4,
+                fill: 'var(--color-brand-500)',
+                strokeWidth: 0,
+              }}
             />
             <Area
               type="monotone"
               dataKey="lastYear"
-              stroke="var(--border-default)"
+              stroke="var(--color-edge)"
               strokeWidth={1.5}
-              strokeDasharray="5 5"
+              strokeDasharray="4 4"
               fill="none"
               name="Last year"
+              animationDuration={1000}
+              animationBegin={200}
+              animationEasing="ease-out"
+              dot={false}
             />
           </AreaChart>
         </ResponsiveContainer>

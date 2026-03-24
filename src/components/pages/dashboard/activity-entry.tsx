@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import { cn } from '@/lib/utils';
 import {
   UserPlus,
   ArrowRightLeft,
@@ -7,10 +8,10 @@ import {
   Mail,
   StickyNote,
   DollarSign,
-} from "lucide-react";
-import type { ActivityEntry as ActivityEntryType } from "@/types/dashboard";
+} from 'lucide-react';
+import type { ActivityEntry as ActivityEntryType } from '@/types/dashboard';
 
-const iconMap: Record<ActivityEntryType["icon"], React.ElementType> = {
+const iconMap: Record<ActivityEntryType['icon'], React.ElementType> = {
   lead: UserPlus,
   deal: ArrowRightLeft,
   call: Phone,
@@ -20,19 +21,19 @@ const iconMap: Record<ActivityEntryType["icon"], React.ElementType> = {
   commission: DollarSign,
 };
 
-const iconColorMap: Record<ActivityEntryType["icon"], string> = {
-  lead: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
-  deal: "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
-  call: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
-  email: "bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
-  note: "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400",
-  task: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
-  commission: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+const iconColorMap: Record<ActivityEntryType['icon'], string> = {
+  lead: 'bg-activity-lead text-activity-lead-text',
+  deal: 'bg-activity-deal text-activity-deal-text',
+  call: 'bg-activity-success text-activity-success-text',
+  email: 'bg-activity-email text-activity-email-text',
+  note: 'bg-activity-note text-activity-note-text',
+  task: 'bg-activity-neutral text-activity-neutral-text',
+  commission: 'bg-activity-success text-activity-success-text',
 };
 
 function highlightMessage(
   message: string,
-  highlights: ActivityEntryType["highlights"]
+  highlights: ActivityEntryType['highlights']
 ): React.ReactNode {
   if (highlights.length === 0) return message;
 
@@ -51,9 +52,9 @@ function highlightMessage(
       <span
         key={keyIndex++}
         className={
-          hl.type === "person"
-            ? "font-medium text-[var(--color-brand-500)]"
-            : "font-semibold text-[var(--content-emphasis)]"
+          hl.type === 'person'
+            ? 'font-medium text-brand-500'
+            : 'font-semibold text-content-emphasis'
         }
       >
         {hl.text}
@@ -77,15 +78,18 @@ export function ActivityEntryItem({ entry }: ActivityEntryProps) {
   return (
     <div className="flex gap-3 py-2">
       <div
-        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${colorClass}`}
+        className={cn(
+          'flex h-8 w-8 shrink-0 items-center justify-center rounded-full',
+          colorClass
+        )}
       >
         <Icon className="h-4 w-4" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-sm text-[var(--content-default)] leading-5">
+        <p className="text-sm text-content-default leading-5">
           {highlightMessage(entry.message, entry.highlights)}
         </p>
-        <p className="mt-0.5 text-xs text-[var(--content-muted)]">
+        <p className="mt-0.5 text-xs text-content-muted">
           {entry.relativeTime}
         </p>
       </div>

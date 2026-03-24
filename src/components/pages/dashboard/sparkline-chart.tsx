@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useId } from "react";
-import { AreaChart, Area, ResponsiveContainer } from "recharts";
+import { useId } from 'react';
+import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 
 interface SparklineChartProps {
   data: number[];
@@ -10,7 +10,7 @@ interface SparklineChartProps {
 
 export function SparklineChart({
   data,
-  color = "var(--color-brand-500)",
+  color = 'var(--color-sparkline)',
 }: SparklineChartProps) {
   const gradientId = useId();
   const chartData = data.map((value, index) => ({ index, value }));
@@ -20,7 +20,7 @@ export function SparklineChart({
       <AreaChart data={chartData}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity={0.3} />
+            <stop offset="0%" stopColor={color} stopOpacity={0.15} />
             <stop offset="100%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
@@ -30,7 +30,9 @@ export function SparklineChart({
           stroke={color}
           strokeWidth={1.5}
           fill={`url(#${gradientId})`}
-          isAnimationActive={false}
+          isAnimationActive
+          animationDuration={800}
+          animationEasing="ease-out"
         />
       </AreaChart>
     </ResponsiveContainer>

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useAtomValue } from "jotai";
-import { activitiesAtom, dashboardLoadingAtom } from "@/store";
-import { ActivityEntryItem } from "./activity-entry";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useAtomValue } from 'jotai';
+import { activitiesAtom, dashboardLoadingAtom } from '@/store';
+import { ActivityEntryItem } from './activity-entry';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function ActivityFeed() {
   const activities = useAtomValue(activitiesAtom);
@@ -11,7 +11,7 @@ export function ActivityFeed() {
 
   if (loading || !activities) {
     return (
-      <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-default)] p-6 shadow-xs">
+      <div className="rounded-lg border border-edge-subtle bg-surface p-6 shadow-xs">
         <Skeleton className="h-5 w-28" />
         <div className="mt-4 space-y-4">
           {Array.from({ length: 4 }).map((_, i) => (
@@ -29,19 +29,19 @@ export function ActivityFeed() {
   }
 
   return (
-    <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-default)] p-6 shadow-xs">
-      <h2 className="text-base font-semibold text-[var(--content-emphasis)]">
+    <div className="rounded-lg border border-edge-subtle bg-surface p-6 shadow-xs">
+      <h2 className="text-base font-semibold text-content-emphasis">
         Activity Feed
       </h2>
 
       <div className="mt-4 space-y-4">
-        {activities.groups.map((group) => (
+        {activities.groups.map(group => (
           <div key={group.label}>
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--content-muted)]">
+            <p className="text-2xs font-semibold uppercase tracking-wider text-content-muted">
               {group.label}
             </p>
-            <div className="mt-1 divide-y divide-[var(--border-muted)]">
-              {group.entries.map((entry) => (
+            <div className="mt-1 divide-y divide-edge-muted">
+              {group.entries.map(entry => (
                 <ActivityEntryItem key={entry.id} entry={entry} />
               ))}
             </div>
@@ -49,7 +49,7 @@ export function ActivityFeed() {
         ))}
       </div>
 
-      <button className="mt-4 text-sm font-medium text-[var(--color-brand-500)] hover:underline">
+      <button className="mt-4 text-sm font-medium text-brand-500 hover:underline">
         View full activity log &rarr;
       </button>
     </div>

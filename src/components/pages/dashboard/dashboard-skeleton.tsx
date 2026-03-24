@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function DashboardSkeleton() {
   return (
@@ -13,24 +13,24 @@ export function DashboardSkeleton() {
       </div>
 
       {/* Date filter skeleton */}
-      <Skeleton className="h-10 w-[500px] rounded-lg" />
+      <Skeleton className="h-10 w-125 rounded-lg" />
 
       {/* KPI cards skeleton */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 tablet-s:grid-cols-2 desktop-m:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton key={i} className="h-[100px] rounded-lg" />
+          <Skeleton key={i} className="h-25 rounded-lg" />
         ))}
       </div>
 
       {/* Main content skeleton */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
-        <div className="space-y-6 lg:col-span-3">
-          <Skeleton className="h-[340px] rounded-lg" />
-          <Skeleton className="h-[300px] rounded-lg" />
+      <div className="grid grid-cols-1 gap-6 tablet-m:grid-cols-2 desktop-s:grid-cols-5">
+        <div className="space-y-6 tablet-m:col-span-2 desktop-s:col-span-3">
+          <Skeleton className="h-85 rounded-lg" />
+          <Skeleton className="h-75 rounded-lg" />
         </div>
-        <div className="space-y-6 lg:col-span-2">
-          <Skeleton className="h-[380px] rounded-lg" />
-          <Skeleton className="h-[340px] rounded-lg" />
+        <div className="space-y-6 tablet-m:col-span-2 desktop-s:col-span-2">
+          <Skeleton className="h-95 rounded-lg" />
+          <Skeleton className="h-85 rounded-lg" />
         </div>
       </div>
     </div>

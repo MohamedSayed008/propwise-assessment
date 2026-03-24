@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { TrendingUp, TrendingDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { SparklineChart } from "./sparkline-chart";
-import type { DashboardKPI } from "@/types/dashboard";
+import { TrendingUp, TrendingDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { SparklineChart } from './sparkline-chart';
+import type { DashboardKPI } from '@/types/dashboard';
 
 interface KpiCardProps {
   kpi: DashboardKPI;
 }
 
 export function KpiCard({ kpi }: KpiCardProps) {
-  const isUp = kpi.trendDirection === "up";
+  const isUp = kpi.trendDirection === 'up';
 
   return (
-    <div className="flex items-start justify-between rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-default)] p-4 shadow-xs">
+    <div className="flex items-start justify-between rounded-lg border border-edge-subtle bg-surface p-4 shadow-xs">
       <div className="min-w-0">
-        <p className="text-xs text-[var(--content-subtle)]">{kpi.label}</p>
-        <p className="mt-1 font-heading text-2xl font-extrabold tracking-[0.01em] text-[var(--content-emphasis)]">
+        <p className="text-xs text-content-subtle">{kpi.label}</p>
+        <p className="mt-1 font-heading text-2xl font-extrabold tracking-dashboard text-content-emphasis">
           {kpi.value}
         </p>
       </div>
@@ -24,10 +24,8 @@ export function KpiCard({ kpi }: KpiCardProps) {
         <SparklineChart data={kpi.sparklineData} />
         <div
           className={cn(
-            "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
-            isUp
-              ? "text-green-600 dark:text-green-400"
-              : "text-red-600 dark:text-red-400"
+            'inline-flex items-center gap-1 rounded-full p-0.75 text-xs font-medium',
+            isUp ? 'bg-kpi-trend-bg text-sparkline' : 'text-status-danger'
           )}
         >
           {isUp ? (
