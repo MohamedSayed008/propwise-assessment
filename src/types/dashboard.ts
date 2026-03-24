@@ -2,7 +2,7 @@ export interface DashboardKPI {
   label: string;
   value: string;
   trend: number;
-  trendDirection: "up" | "down";
+  trendDirection: 'up' | 'down';
   sparklineData: number[];
 }
 
@@ -22,10 +22,10 @@ export interface PipelineStage {
 export interface ActivityEntry {
   id: string;
   message: string;
-  highlights: { text: string; type: "person" | "stage" | "deal" }[];
+  highlights: { text: string; type: 'person' | 'stage' | 'deal' }[];
   timestamp: string;
   relativeTime: string;
-  icon: "lead" | "deal" | "call" | "email" | "note" | "task" | "commission";
+  icon: 'lead' | 'deal' | 'call' | 'email' | 'note' | 'task' | 'commission';
 }
 
 export interface Task {
@@ -33,8 +33,8 @@ export interface Task {
   title: string;
   dueLabel: string;
   isOverdue: boolean;
-  type: "task" | "email" | "meeting" | "call";
-  priority: "low" | "med" | "high";
+  type: 'task' | 'email' | 'meeting' | 'call';
+  priority: 'low' | 'med' | 'high';
   completed: boolean;
 }
 
@@ -52,9 +52,9 @@ export interface DashboardData {
 }
 
 export type Period =
-  | "today"
-  | "this_week"
-  | "this_month"
-  | "this_quarter"
-  | "this_year"
-  | "custom";
+  | 'today'
+  | 'this_week'
+  | 'this_month'
+  | 'this_quarter'
+  | 'this_year'
+  | 'custom';

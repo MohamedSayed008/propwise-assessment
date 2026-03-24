@@ -8,4 +8,4 @@ export {
   pipelineAtom,
   activitiesAtom,
   tasksAtom,
-} from "./dashboard";
+} from './dashboard';

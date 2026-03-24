@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useCallback } from "react";
-import { useAtom, useSetAtom, useAtomValue } from "jotai";
+import { useCallback } from 'react';
+import { useAtom, useSetAtom, useAtomValue } from 'jotai';
 import {
   periodAtom,
   dashboardLoadingAtom,
   dashboardDataAtom,
   dashboardErrorAtom,
-} from "@/store";
-import { fetchDashboardData } from "@/lib/mock-api";
-import type { Period } from "@/types/dashboard";
+} from '@/store';
+import { fetchDashboardData } from '@/lib/mock-api';
+import type { Period } from '@/types/dashboard';
 
 export function useDashboard() {
   const [period, setPeriod] = useAtom(periodAtom);
@@ -26,7 +26,8 @@ export function useDashboard() {
         const data = await fetchDashboardData({ period: p });
         setData(data);
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to load data";
+        const message =
+          err instanceof Error ? err.message : 'Failed to load data';
         setError(message);
         throw err;
       } finally {
@@ -38,10 +39,17 @@ export function useDashboard() {
 
   const changePeriod = useCallback(
     async (p: Period) => {
+      const previous = period;
       setPeriod(p);
-      await loadData(p);
+      try {
+        await loadData(p);
+      } catch (err) {
+        // Rollback to previous period on failure
+        setPeriod(previous);
+        throw err;
+      }
     },
-    [setPeriod, loadData]
+    [period, setPeriod, loadData]
   );
 
   return { period, loading, loadData, changePeriod };
