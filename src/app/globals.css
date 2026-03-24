@@ -11,25 +11,152 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-heading: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand colors */
-  --color-brand-50: #ECEEFF;
-  --color-brand-100: #D9DDFF;
-  --color-brand-200: #B3BBFF;
-  --color-brand-300: #8D99FF;
-  --color-brand-400: #6777FF;
-  --color-brand-500: #4155FF;
-  --color-brand-600: #3444CC;
-  --color-brand-700: #273399;
-  --color-brand-800: #1A2266;
-  --color-brand-900: #0D1133;
+  /* Spacing tokens */
+  --spacing-075: 3px;
+  --spacing-125: 5px;
+  --spacing-225: 9px;
+  --spacing-sidebar-dropdown: 231px;
 
-  /* Shadows */
-  --shadow-xs: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-modal: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-dropdown: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  /* Breakpoints */
+  --breakpoint-mobile: 380px;
+  --breakpoint-tablet-s: 744px;
+  --breakpoint-tablet-m: 834px;
+  --breakpoint-desktop-s: 1280px;
+  --breakpoint-desktop-m: 1440px;
+  --breakpoint-desktop-l: 1680px;
+  --breakpoint-desktop-xl: 2000px;
 
-  /* Border radii */
+  /* Letter spacing */
+  --tracking-dashboard: 0.01em;
+
+  /* Component radii */
+  --radius-dropdown-menu: 14px;
+  --radius-dropdown-item: 10px;
+
+  /* Font sizes (custom steps from Figma) */
+  --text-3xs: 8px;
+  --text-3xs--line-height: 10px;
+  --text-2xs: 10px;
+  --text-2xs--line-height: 12px;
+  --text-menu: 12.5px;
+  --text-menu--line-height: 16px;
+  --text-search: 13px;
+  --text-search--line-height: 16px;
+  --text-heading-lg: 28px;
+  --text-heading-lg--line-height: 28px;
+
+  /* ── Base color scales (from Figma design tokens) ── */
+
+  /* Brand / Theme — custom, not standard Tailwind */
+  --color-brand-50: #EBF0FF;
+  --color-brand-100: #D7E1FF;
+  --color-brand-200: #AEC2FF;
+  --color-brand-300: #86A4FF;
+  --color-brand-400: #5D85FF;
+  --color-brand-500: #3567FF;
+  --color-brand-600: #2A53CE;
+  --color-brand-700: #203F9E;
+  --color-brand-800: #152B6D;
+  --color-brand-900: #12204C;
+
+  /* Gray — light mode neutral (modified Tailwind) */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #101010;
+
+  /* Stone — dark mode neutral (modified Tailwind) */
+  --color-stone-50: #FCFCFD;
+  --color-stone-100: #F3F4F6;
+  --color-stone-200: #E8E8E8;
+  --color-stone-300: #D6D6D6;
+  --color-stone-400: #A5A5A5;
+  --color-stone-500: #757575;
+  --color-stone-600: #575757;
+  --color-stone-700: #404040;
+  --color-stone-800: #2E2E2E;
+  --color-stone-900: #1F1F1F;
+
+  /* Red — custom scale */
+  --color-red-50: #FCF2F2;
+  --color-red-100: #F9E3E2;
+  --color-red-200: #F6CCCB;
+  --color-red-300: #F0A9A7;
+  --color-red-400: #E77975;
+  --color-red-500: #DD524C;
+  --color-red-600: #CA3A31;
+  --color-red-700: #AA2E26;
+  --color-red-800: #8C2822;
+  --color-red-900: #752522;
+
+  /* Orange — custom scale */
+  --color-orange-50: #FEF7EE;
+  --color-orange-100: #FCEED8;
+  --color-orange-200: #F8D8B0;
+  --color-orange-300: #F3BD7F;
+  --color-orange-400: #ED974F;
+  --color-orange-500: #E87B35;
+  --color-orange-600: #D9622B;
+  --color-orange-700: #B34A22;
+  --color-orange-800: #8E3B1F;
+  --color-orange-900: #73321B;
+
+  /* Green — custom scale */
+  --color-green-50: #EBFCEE;
+  --color-green-100: #E2FBE8;
+  --color-green-200: #C7F5D3;
+  --color-green-300: #A0ECB1;
+  --color-green-400: #77DB89;
+  --color-green-500: #5EC269;
+  --color-green-600: #4CA154;
+  --color-green-700: #3C7E44;
+  --color-green-800: #306339;
+  --color-green-900: #285231;
+
+  /* Purple — custom scale */
+  --color-purple-50: #EBDFF4;
+  --color-purple-100: #DDCAEC;
+  --color-purple-200: #C0A0DB;
+  --color-purple-300: #A475CA;
+  --color-purple-400: #874BB9;
+  --color-purple-500: #6B21A8;
+  --color-purple-600: #561A86;
+  --color-purple-700: #401465;
+  --color-purple-800: #2B0D43;
+  --color-purple-900: #200A32;
+
+  /* Sparkline / KPI trend */
+  --color-sparkline: #188540;
+  --color-kpi-trend-bg: #F0FDF4;
+
+  /* Dropdown menu */
+  --color-dropdown-border: var(--dropdown-border);
+  --color-dropdown-divider: var(--dropdown-divider);
+  --color-dropdown-logo-border: var(--dropdown-logo-border);
+  --color-dropdown-subtitle: var(--dropdown-subtitle);
+  --color-dropdown-item: var(--dropdown-item);
+  --color-dropdown-trigger-active: var(--dropdown-trigger-active);
+
+  /* Sidebar nav icon inactive color */
+  --color-nav-icon-inactive: var(--nav-icon-inactive);
+
+  /* ── Shadows (from Figma) ── */
+  --shadow-xs: 0px 2px 2px 0px rgba(31, 40, 55, 0.02), 0px 5px 5px 0px rgba(31, 40, 55, 0.02);
+  --shadow-sm: 0px 0px 1px 0px rgba(31, 40, 55, 0.24), 0px 2px 2px 0px rgba(31, 40, 55, 0.04), 0px 5px 5px 0px rgba(31, 40, 55, 0.04);
+  --shadow-modal: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-dropdown: 0px 2px 6px -1px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.08);
+  --shadow-dropdown-menu: 0px -6px 28px 0px rgba(18, 32, 76, 0.1), 0px -1px 4px 0px rgba(18, 32, 76, 0.05);
+  --shadow-toast: 0px 1px 1px 0px rgba(0,0,0,0.07), 0px 1px 2px 0px rgba(0,0,0,0.08), 0px 2px 2px 0px rgba(0,0,0,0.1), 0px 0px 8px 0px rgba(0,0,0,0.05);
+  --shadow-focus-button: 0px 0px 0px 2px rgba(128, 128, 128, 0.3);
+  --shadow-focus-button-destructive: 0px 0px 0px 2px rgba(240, 62, 63, 0.3);
+
+  /* ── Border radii ── */
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -39,18 +166,28 @@
   --radius-4xl: 28px;
   --radius-full: 9999px;
 
-  /* Semantic design tokens — enables bg-surface, text-content-*, border-edge-* */
+  /* ── Semantic design tokens ── */
+  /* Enables bg-surface-*, text-content-*, border-edge-* utility classes */
+
   --color-surface: var(--bg-default);
   --color-surface-subtle: var(--bg-subtle);
   --color-surface-muted: var(--bg-muted);
   --color-surface-emphasis: var(--bg-emphasis);
   --color-surface-inverted: var(--bg-inverted);
+  --color-surface-info: var(--bg-info);
+  --color-surface-success: var(--bg-success);
+  --color-surface-attention: var(--bg-attention);
+  --color-surface-error: var(--bg-error);
 
   --color-content-emphasis: var(--content-emphasis);
   --color-content-default: var(--content-default);
   --color-content-subtle: var(--content-subtle);
   --color-content-muted: var(--content-muted);
   --color-content-inverted: var(--content-inverted);
+  --color-content-info: var(--content-info);
+  --color-content-success: var(--content-success);
+  --color-content-attention: var(--content-attention);
+  --color-content-error: var(--content-error);
 
   --color-edge: var(--border-default);
   --color-edge-subtle: var(--border-subtle);
@@ -73,15 +210,44 @@
 
   /* Chart tokens */
   --color-chart-1: var(--color-brand-500);
-  --color-chart-2: #9CA3AF;
-  --color-chart-3: #10B981;
-  --color-chart-4: #F59E0B;
-  --color-chart-5: #EF4444;
+  --color-chart-2: var(--color-gray-400);
+  --color-chart-3: var(--color-green-500);
+  --color-chart-4: var(--color-orange-500);
+  --color-chart-5: var(--color-red-500);
+
+  /* Status colors — enables text-status-success, bg-status-danger-subtle, etc. */
+  --color-status-success: var(--status-success);
+  --color-status-danger: var(--status-danger);
+  --color-status-warning: var(--status-warning);
+  --color-status-success-subtle: var(--status-success-subtle);
+  --color-status-danger-subtle: var(--status-danger-subtle);
+  --color-status-online: var(--status-online);
+  --color-destructive-foreground: #FFFFFF;
+
+  /* Toast colors — enables bg-toast, text-toast-text, etc. */
+  --color-toast: var(--toast-bg);
+  --color-toast-text: var(--toast-text);
+  --color-toast-error: var(--toast-error-bg);
+  --color-toast-error-text: var(--toast-error-text);
+
+  /* Activity category colors — enables bg-activity-lead, text-activity-lead-text, etc. */
+  --color-activity-lead: var(--activity-lead-bg);
+  --color-activity-lead-text: var(--activity-lead-text);
+  --color-activity-deal: var(--activity-deal-bg);
+  --color-activity-deal-text: var(--activity-deal-text);
+  --color-activity-success: var(--activity-success-bg);
+  --color-activity-success-text: var(--activity-success-text);
+  --color-activity-email: var(--activity-email-bg);
+  --color-activity-email-text: var(--activity-email-text);
+  --color-activity-note: var(--activity-note-bg);
+  --color-activity-note-text: var(--activity-note-text);
+  --color-activity-neutral: var(--activity-neutral-bg);
+  --color-activity-neutral-text: var(--activity-neutral-text);
 
   --color-ring: var(--color-brand-500);
   --color-input: var(--border-default);
   --color-border: var(--border-default);
-  --color-destructive: #DC2626;
+  --color-destructive: var(--color-red-600);
   --color-accent-foreground: var(--content-emphasis);
   --color-accent: var(--bg-subtle);
   --color-muted-foreground: var(--content-subtle);
@@ -96,84 +262,175 @@
   --color-card: var(--bg-default);
 }
 
+/* ── Light mode semantic aliases ── */
 :root {
-  /* Background aliases */
+  /* next/font fallbacks for editor/static CSS tooling */
+  --font-figtree: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+  --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-geist-mono: 'Geist Mono', ui-monospace, monospace;
+
+  /* Background */
   --bg-emphasis: #E5E7EB;
   --bg-default: #FFFFFF;
   --bg-subtle: #F3F4F6;
   --bg-muted: #F9FAFB;
-  --bg-inverted: #111827;
-  --bg-info: #DBEAFE;
-  --bg-success: #D1FAE5;
-  --bg-attention: #FFEDD5;
-  --bg-error: #FEE2E2;
+  --bg-inverted: #101010;
+  --bg-info: #D7E1FF;
+  --bg-success: #E2FBE8;
+  --bg-attention: #FCEED8;
+  --bg-error: #F9E3E2;
 
-  /* Border aliases */
+  /* Border */
   --border-emphasis: #9CA3AF;
   --border-default: #D1D5DB;
   --border-subtle: #E5E7EB;
   --border-muted: #F3F4F6;
 
-  /* Content aliases */
-  --content-emphasis: #111827;
+  /* Content */
+  --content-emphasis: #101010;
   --content-default: #374151;
   --content-subtle: #6B7280;
   --content-muted: #9CA3AF;
-  --content-inverted: #FFFFFF;
-  --content-info: #1E3A8A;
-  --content-success: #14532D;
-  --content-attention: #7C2D12;
-  --content-error: #7F1D1D;
+  --content-inverted: #F9FAFB;
+  --content-info: #12204C;
+  --content-success: #285231;
+  --content-attention: #73321B;
+  --content-error: #752522;
 
-  /* Brand aliases */
-  --brand-bg-emphasis: #0D1133;
-  --brand-bg-default: #4155FF;
-  --brand-bg-subtle: #D9DDFF;
+  /* Brand */
+  --brand-bg-emphasis: #12204C;
+  --brand-bg-default: #3567FF;
+  --brand-bg-subtle: #D7E1FF;
+
+  /* Status colors (standalone text) */
+  --status-success: #4CA154;
+  --status-danger: #CA3A31;
+  --status-warning: #D9622B;
+  --status-success-subtle: #E2FBE8;
+  --status-danger-subtle: rgba(252, 242, 242, 0.5);
+  --status-online: #5EC269;
+
+  /* Toast */
+  --toast-bg: #101010;
+  --toast-text: #F9FAFB;
+  --toast-error-bg: #F9E3E2;
+  --toast-error-text: #752522;
+
+  /* Activity category icon colors */
+  --activity-lead-bg: #D7E1FF;
+  --activity-lead-text: #203F9E;
+  --activity-deal-bg: #DDCAEC;
+  --activity-deal-text: #561A86;
+  --activity-success-bg: #E2FBE8;
+  --activity-success-text: #4CA154;
+  --activity-email-bg: #FCEED8;
+  --activity-email-text: #D9622B;
+  --activity-note-bg: #FEF7EE;
+  --activity-note-text: #B34A22;
+  --activity-neutral-bg: #F3F4F6;
+  --activity-neutral-text: #4B5563;
+
+  /* Dropdown menu */
+  --dropdown-border: #E8EBF2;
+  --dropdown-divider: #F0F1F5;
+  --dropdown-logo-border: #D7D7D7;
+  --dropdown-subtitle: #A0A9BD;
+  --dropdown-item: #5A6478;
+  --dropdown-trigger-active: #E8E8E8;
+
+  /* Sidebar nav icon */
+  --nav-icon-inactive: #757575;
 }
 
+/* ── Dark mode semantic aliases ── */
 .dark {
-  /* Background aliases */
-  --bg-emphasis: #44403C;
-  --bg-default: #000000;
-  --bg-subtle: #292524;
-  --bg-muted: #1C1917;
-  --bg-inverted: #FAFAF9;
-  --bg-info: #1E3A8A;
-  --bg-success: #14532D;
-  --bg-attention: #7C2D12;
-  --bg-error: #7F1D1D;
+  /* Background */
+  --bg-emphasis: #525252;
+  --bg-default: #1A1A1A;
+  --bg-subtle: #2E2E2E;
+  --bg-muted: #1F1F1F;
+  --bg-inverted: #F3F4F6;
+  --bg-info: #253985;
+  --bg-success: #285231;
+  --bg-attention: #73321B;
+  --bg-error: #752522;
 
-  /* Border aliases */
-  --border-emphasis: #78716C;
-  --border-default: #57534E;
-  --border-subtle: #44403C;
-  --border-muted: #292524;
+  /* Border */
+  --border-emphasis: #757575;
+  --border-default: #575757;
+  --border-subtle: #383838;
+  --border-muted: #2E2E2E;
 
-  /* Content aliases */
-  --content-emphasis: #FAFAF9;
-  --content-default: #D6D3D1;
-  --content-subtle: #A8A29E;
-  --content-muted: #57534E;
-  --content-inverted: #000000;
-  --content-info: #DBEAFE;
-  --content-success: #D1FAE5;
-  --content-attention: #FFEDD5;
-  --content-error: #FEE2E2;
+  /* Content */
+  --content-emphasis: #FCFCFD;
+  --content-default: #D6D6D6;
+  --content-subtle: #A5A5A5;
+  --content-muted: #575757;
+  --content-inverted: #1A1A1A;
+  --content-info: #DEE9FC;
+  --content-success: #E2FBE8;
+  --content-attention: #FCEED8;
+  --content-error: #F9E3E2;
 
-  /* Brand aliases */
-  --brand-bg-emphasis: #D9DDFF;
-  --brand-bg-default: #4155FF;
-  --brand-bg-subtle: #0D1133;
+  /* Brand */
+  --brand-bg-emphasis: #D7E1FF;
+  --brand-bg-default: #3567FF;
+  --brand-bg-subtle: #12204C;
+
+  /* Status colors (standalone text) */
+  --status-success: #77DB89;
+  --status-danger: #F0A9A7;
+  --status-warning: #F3BD7F;
+  --status-success-subtle: rgba(40, 82, 49, 0.3);
+  --status-danger-subtle: rgba(117, 37, 34, 0.1);
+  --status-online: #77DB89;
+
+  /* Toast */
+  --toast-bg: #1A1A1A;
+  --toast-text: #FCFCFD;
+  --toast-error-bg: #752522;
+  --toast-error-text: #F9E3E2;
+
+  /* Activity category icon colors */
+  --activity-lead-bg: rgba(18, 32, 76, 0.3);
+  --activity-lead-text: #AEC2FF;
+  --activity-deal-bg: rgba(32, 10, 50, 0.3);
+  --activity-deal-text: #C0A0DB;
+  --activity-success-bg: rgba(40, 82, 49, 0.3);
+  --activity-success-text: #A0ECB1;
+  --activity-email-bg: rgba(115, 50, 27, 0.3);
+  --activity-email-text: #F3BD7F;
+  --activity-note-bg: rgba(142, 59, 31, 0.3);
+  --activity-note-text: #F8D8B0;
+  --activity-neutral-bg: #2E2E2E;
+  --activity-neutral-text: #A5A5A5;
+
+  /* Dropdown menu */
+  --dropdown-border: #383838;
+  --dropdown-divider: #2E2E2E;
+  --dropdown-logo-border: #575757;
+  --dropdown-subtitle: #757575;
+  --dropdown-item: #A5A5A5;
+  --dropdown-trigger-active: #404040;
+
+  /* Sidebar nav icon */
+  --nav-icon-inactive: #A5A5A5;
 }
 
 @layer base {
   * {
-    @apply border-[var(--border-subtle)] outline-ring/50;
+    @apply border-edge-subtle outline-ring/50;
   }
   body {
-    @apply bg-surface-muted text-[var(--content-default)];
+    @apply bg-surface-muted text-content-default;
   }
   html {
     @apply font-body;
+  }
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
   }
 }
