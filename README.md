@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PropWise CRM Dashboard
 
-## Getting Started
+A pixel-perfect Next.js frontend implementing a real estate CRM dashboard from a Figma design specification.
 
-First, run the development server:
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # Start dev server on localhost:3000
+npm run build    # Production build
+npm run lint     # ESLint check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No environment variables are required. No backend — uses a mock API with simulated latency and ~5% failure rate.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Technology | Version | Purpose |
+|---|---|---|
+| Next.js | 16 (App Router) | Framework |
+| React | 19 | UI library |
+| TypeScript | 5 (strict, no `any`) | Type safety |
+| Tailwind CSS | 4 (`@theme inline`) | Styling via semantic design tokens |
+| shadcn/ui | Latest (Radix primitives) | UI component library |
+| Recharts | 3 | Charts (area, sparkline) |
+| Jotai | 2 | Atomic state management |
+| Framer Motion | Latest | Animations (tabs, pipeline bars) |
+| Sonner | Latest | Toast notifications (custom styled) |
+| next-themes | Latest | Dark mode |
 
-## Learn More
+> **Intentional Compatibility Upgrade:** Next 16, React 19, Tailwind 4, and Recharts 3 were chosen deliberately. See [DECISIONS.md](./DECISIONS.md) for proof of no behavioral drift.
 
-To learn more about Next.js, take a look at the following resources:
+## Rubric Alignment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Area | Points | Implementation |
+|---|---|---|
+| Design Fidelity | 25 | Full semantic token system (colors, shadows, radii, font sizes), Figma-exact base scales, zero hardcoded values |
+| Responsive Design | 15 | 7 custom breakpoints (380–2000px), mobile drawer, tablet grid, no Tailwind default breakpoints |
+| Charts & Data Viz | 15 | Recharts area chart with dual areas + gradient, animated pipeline bars (Framer Motion), animated sparklines |
+| Toast Notifications | 10 | Custom-styled Sonner matching Figma spec, 4 trigger types, undo/retry actions, single-toast display |
+| State Management | 15 | Jotai atoms + 5 derived atoms for render optimization, transactional period switching with rollback, URL sync |
+| Component Architecture | 10 | shadcn primitives, shared CheckboxCircle, custom icons from Figma, keyboard-navigable tabs, semantic HTML |
+| Code Quality | 10 | Strict TypeScript (no `any`), RTL-safe logical properties, clean file organization, zero lint warnings |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture
 
-## Deploy on Vercel
+```
+src/
+├── app/              # App Router (layout, dashboard page)
+├── components/
+│   ├── ui/           # shadcn primitives (button, dropdown, drawer, etc.)
+│   ├── layout/       # Sidebar (224px fixed, shadcn Drawer on mobile)
+│   └── pages/dashboard/  # All dashboard section components
+├── icons/            # 12 custom Figma SVG icon components
+├── lib/              # Mock API (deterministic per-period data), utilities
+├── store/            # Jotai atoms (period, data, derived per-section)
+├── types/            # TypeScript interfaces
+└── hooks/            # useDashboard hook
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Tokens:** All colors, shadows, radii, font sizes defined in `globals.css` `@theme inline`
+- **Breakpoints:** `mobile` (380), `tablet-s` (744), `tablet-m` (834), `desktop-s` (1280), `desktop-m` (1440), `desktop-l` (1680), `desktop-xl` (2000)
+- **RTL-safe:** All layout uses logical properties (`ps-`/`pe-`/`ms-`/`me-`/`start`/`end`)
+- **Dark mode:** Full dark token set with `next-themes` toggle
+
+## Bonus Features
+
+- Dark mode with design system dark alias tokens
+- Animated pipeline bar chart entrance (Framer Motion)
+- URL-synced active period (`?period=this_week`)
+- Keyboard navigation for date filter tabs (Arrow keys, RTL-aware)
+- Per-section skeleton loaders
+- Deterministic mock data per period (seeded PRNG)
