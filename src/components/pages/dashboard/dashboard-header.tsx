@@ -28,6 +28,7 @@ export function DashboardHeader() {
         {/* Create button */}
         <button
           onClick={() => toast("Feature coming soon")}
+          aria-label="Create new item"
           className="flex items-center gap-1.5 rounded-lg bg-[var(--color-brand-500)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--color-brand-600)]"
         >
           + Create

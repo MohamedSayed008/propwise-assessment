@@ -15,8 +15,8 @@ import {
 } from "recharts";
 
 function formatAxisValue(value: number): string {
-  if (value >= 1000) return `$${Math.round(value / 1000)}K`;
-  return `$${value}`;
+  if (value >= 1000) return `AED ${Math.round(value / 1000)}K`;
+  return `AED ${value}`;
 }
 
 export function RevenueForecast() {
@@ -66,7 +66,7 @@ export function RevenueForecast() {
           This year
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-0.5 w-4 rounded border-t-2 border-dashed border-gray-300" />
+          <span className="inline-block h-0.5 w-4 rounded border-t-2 border-dashed border-[var(--border-default)]" />
           Last year
         </span>
       </div>
@@ -127,7 +127,7 @@ export function RevenueForecast() {
             <Area
               type="monotone"
               dataKey="lastYear"
-              stroke="#D1D5DB"
+              stroke="var(--border-default)"
               strokeWidth={1.5}
               strokeDasharray="5 5"
               fill="none"

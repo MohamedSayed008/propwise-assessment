@@ -78,12 +78,9 @@ function SidebarContent() {
     <div className="flex h-full flex-col">
       {/* User section */}
       <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] px-4 py-4">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://i.pravatar.cc/40?u=lina-rahman"
-          alt="Lina Rahman"
-          className="h-10 w-10 rounded-full object-cover"
-        />
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-brand-400)] to-[var(--color-brand-600)] text-sm font-semibold text-white">
+          LR
+        </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
             <span className="text-sm font-semibold text-[var(--content-emphasis)] truncate">

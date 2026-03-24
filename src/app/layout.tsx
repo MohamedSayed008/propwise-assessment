@@ -44,10 +44,12 @@ export default function RootLayout({
             position="bottom-right"
             gap={8}
             toastOptions={{
-              className: "!rounded-full !px-4 !py-2.5 !text-sm !font-medium !shadow-dropdown !border-0",
-              style: {
-                background: "var(--bg-inverted)",
-                color: "var(--content-inverted)",
+              classNames: {
+                toast: "!rounded-full !px-4 !py-2.5 !text-sm !font-medium !shadow-dropdown !border-0",
+                default: "!bg-[var(--bg-inverted)] !text-[var(--content-inverted)]",
+                success: "!bg-green-700 !text-white",
+                error: "!bg-red-100 !text-red-900 dark:!bg-red-900 dark:!text-red-100",
+                info: "!bg-blue-600 !text-white",
               },
             }}
           />
