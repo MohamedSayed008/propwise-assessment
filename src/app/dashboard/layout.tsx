@@ -8,10 +8,10 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[var(--bg-muted)]">
+    <div className="min-h-screen bg-surface-muted">
       <Sidebar />
       <main className="lg:ml-56 min-h-screen">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <Suspense fallback={<DashboardSkeleton />}>
             {children}
           </Suspense>

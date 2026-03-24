@@ -176,7 +176,7 @@ function SidebarContent() {
   }, [dropdownOpen]);
 
   return (
-    <div className="flex h-full flex-col bg-[var(--bg-muted)]">
+    <div className="flex h-full flex-col bg-surface-muted">
       {/* User section */}
       <div ref={dropdownRef} className="relative px-3 pt-4 pb-3">
         <button

@@ -39,7 +39,25 @@
   --radius-4xl: 28px;
   --radius-full: 9999px;
 
-  /* Semantic alias tokens (light mode defaults) */
+  /* Semantic design tokens — enables bg-surface, text-content-*, border-edge-* */
+  --color-surface: var(--bg-default);
+  --color-surface-subtle: var(--bg-subtle);
+  --color-surface-muted: var(--bg-muted);
+  --color-surface-emphasis: var(--bg-emphasis);
+  --color-surface-inverted: var(--bg-inverted);
+
+  --color-content-emphasis: var(--content-emphasis);
+  --color-content-default: var(--content-default);
+  --color-content-subtle: var(--content-subtle);
+  --color-content-muted: var(--content-muted);
+  --color-content-inverted: var(--content-inverted);
+
+  --color-edge: var(--border-default);
+  --color-edge-subtle: var(--border-subtle);
+  --color-edge-muted: var(--border-muted);
+  --color-edge-emphasis: var(--border-emphasis);
+
+  /* Shadcn compat */
   --color-background: var(--bg-default);
   --color-foreground: var(--content-emphasis);
 
@@ -153,7 +171,7 @@
     @apply border-[var(--border-subtle)] outline-ring/50;
   }
   body {
-    @apply bg-[var(--bg-muted)] text-[var(--content-default)];
+    @apply bg-surface-muted text-[var(--content-default)];
   }
   html {
     @apply font-body;
