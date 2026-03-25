@@ -1,12 +1,8 @@
-import { Suspense } from 'react';
+import { type ReactNode, Suspense } from 'react';
 import { Sidebar } from '@/components/layout/sidebar';
 import { DashboardSkeleton } from '@/components/pages/dashboard';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-surface-muted">
       <Sidebar />
