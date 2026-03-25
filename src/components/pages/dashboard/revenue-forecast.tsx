@@ -54,9 +54,7 @@ export function RevenueForecast() {
             <TrendingUp className="size-2.5" strokeWidth={2.25} />+
             {revenue.trend}%
           </span>
-          <span className="pb-0.5 text-xs text-content-muted">
-            vs last year
-          </span>
+          <span className="text-xs text-content-muted">vs last year</span>
         </div>
       </div>
 

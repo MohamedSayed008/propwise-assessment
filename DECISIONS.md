@@ -59,6 +59,33 @@ Non-standard type steps from the Figma spec, registered as theme tokens:
 - `text-search` (13px/16px) — search input
 - `text-heading-lg` (28px/28px) — page headings
 
+### Typography utility classes
+
+Pre-composed `t-*` utility classes in `@layer utilities` bundle font-family, font-size, font-weight, and line-height into a single class. Components use these instead of combining individual tokens inline.
+
+| Utility | Font | Size | Weight |
+| --- | --- | --- | --- |
+| `t-title-1` | Figtree | 28px | Extrabold |
+| `t-title-2` | Figtree | 24px | Extrabold |
+| `t-title-3` | Figtree | 20px | Extrabold |
+| `t-heading-lg` | Figtree | 28px | Bold |
+| `t-heading-md` | Figtree | 20px | Bold |
+| `t-heading-xxs-bold` | Figtree | 10px | Bold |
+| `t-base-medium` | Inter | 16px | Medium |
+| `t-base-semibold` | Inter | 16px | Semibold |
+| `t-sm-regular` | Inter | 14px | Normal |
+| `t-sm-medium` | Inter | 14px | Medium |
+| `t-sm-semibold` | Inter | 14px | Semibold |
+| `t-xs-regular` | Inter | 12px | Normal |
+| `t-xs-medium` | Inter | 12px | Medium |
+| `t-xs-semibold` | Inter | 12px | Semibold |
+| `t-xxs-regular` | Inter | 10px | Medium |
+| `t-xxs-semibold` | Inter | 10px | Semibold |
+| `t-mono-sm` | SF Mono | 14px | Normal |
+| `t-mono-xs` | IBM Plex Mono | 10px | — |
+
+Chart-specific sizes (`text-chart` 11px, `text-search` 13px, `text-menu` 12.5px) remain as individual tokens since they are component-specific and don't map to the general typography scale.
+
 ### Rule: no hardcoded hex in components
 
 All component files reference semantic tokens or Tailwind theme tokens exclusively. Raw hex values live only in `globals.css` where they define the scales and aliases.
