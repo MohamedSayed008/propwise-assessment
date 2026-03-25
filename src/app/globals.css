@@ -472,119 +472,135 @@
 }
 
 @layer utilities {
-  .type-title-1 {
+  .t-title-1 {
     @apply font-heading text-title-1 font-extrabold tracking-title;
   }
 
-  .type-title-2 {
+  .t-title-2 {
     @apply font-heading text-title-2 font-extrabold tracking-title;
   }
 
-  .type-title-3 {
+  .t-title-3 {
     @apply font-heading text-title-3 font-extrabold tracking-title;
   }
 
-  .type-leading-none-text-base-semibold {
+  .t-heading-lg {
+    @apply font-heading text-title-1 font-bold tracking-tight;
+  }
+
+  .t-heading-md {
+    @apply font-heading text-title-3 font-bold;
+  }
+
+  .t-heading-xxs-bold {
+    @apply font-heading text-label-xs font-bold;
+  }
+
+  .t-base-medium {
+    @apply font-body text-label-lg font-medium;
+  }
+
+  .t-leading-none-text-base-semibold {
       @apply font-body text-label-lg font-semibold;
   }
 
-  .type-leading-none-text-sm-normal {
+  .t-leading-none-text-sm-normal {
     @apply font-body text-body-sm font-normal;
   }
 
-  .type-leading-none-text-sm-medium {
+  .t-leading-none-text-sm-medium {
     @apply font-body text-body-sm font-medium;
   }
 
-  .type-leading-none-text-sm-semibold {
+  .t-leading-none-text-sm-semibold {
     @apply font-body text-body-sm font-semibold;
   }
 
-  .type-leading-none-text-sm-mono {
+  .t-leading-none-text-sm-mono {
     @apply font-mono text-mono-md font-normal;
   }
 
-  .type-leading-none-text-xs-normal {
+  .t-leading-none-text-xs-normal {
     @apply font-body text-label-sm font-normal;
   }
 
-  .type-leading-none-text-xs-medium {
+  .t-leading-none-text-xs-medium {
     @apply font-body text-label-sm font-medium;
   }
 
-  .type-leading-none-text-xs-semibold {
+  .t-leading-none-text-xs-semibold {
     @apply font-body text-label-sm font-semibold;
   }
 
-  .type-leading-none-text-xxs-regular {
+  .t-leading-none-text-xxs-regular {
     @apply font-body text-label-xs font-medium;
   }
 
-  .type-leading-none-text-xxs-semibold {
+  .t-leading-none-text-xxs-semibold {
     @apply font-body text-label-xs font-semibold;
   }
 
-  .type-leading-normal-text-sm-normal {
+  .t-leading-normal-text-sm-normal {
     @apply font-body text-body-md font-normal;
   }
 
-  .type-leading-normal-text-sm-medium {
+  .t-leading-normal-text-sm-medium {
     @apply font-body text-body-md font-medium;
   }
 
-  .type-leading-normal-text-xs-mono {
+  .t-leading-normal-text-xs-mono {
     @apply font-mono-alt text-mono-xs;
   }
 
-  .type-base-semibold {
+  .t-base-semibold {
     @apply font-body text-label-lg font-semibold;
   }
 
-  .type-sm-regular {
+  .t-sm-regular {
     @apply font-body text-body-sm font-normal;
   }
 
-  .type-sm-medium {
+  .t-sm-medium {
     @apply font-body text-body-sm font-medium;
   }
 
-  .type-sm-semibold {
+  .t-sm-semibold {
     @apply font-body text-body-sm font-semibold;
   }
 
-  .type-sm-regular-relaxed {
+  .t-sm-regular-relaxed {
     @apply font-body text-body-md font-normal;
   }
 
-  .type-sm-medium-relaxed {
+  .t-sm-medium-relaxed {
     @apply font-body text-body-md font-medium;
   }
 
-  .type-xs-regular {
+  .t-xs-regular {
     @apply font-body text-label-sm font-normal;
   }
 
-  .type-xs-medium {
+  .t-xs-medium {
     @apply font-body text-label-sm font-medium;
   }
 
-  .type-xs-semibold {
+  .t-xs-semibold {
     @apply font-body text-label-sm font-semibold;
   }
 
-  .type-xxs-regular {
+  .t-xxs-regular {
     @apply font-body text-label-xs font-medium;
   }
 
-  .type-xxs-semibold {
+  .t-xxs-semibold {
     @apply font-body text-label-xs font-semibold;
   }
 
-  .type-mono-sm {
+  .t-mono-sm {
     @apply font-mono text-mono-md font-normal;
   }
 
-  .type-mono-xs {
+  .t-mono-xs {
     @apply font-mono-alt text-mono-xs;
   }
 }

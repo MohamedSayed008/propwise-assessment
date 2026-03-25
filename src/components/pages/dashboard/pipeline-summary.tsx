@@ -120,15 +120,15 @@ export function PipelineSummary() {
     <div className="rounded-lg border border-edge-subtle bg-surface p-6 shadow-xs">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-medium text-content-emphasis">
+        <h2 className="t-base-medium text-content-emphasis">
           Pipeline Summary
         </h2>
-        <button className="inline-flex items-center gap-1 text-xs font-semibold text-brand-500 hover:opacity-80">
+        <button className="inline-flex items-center gap-1 t-xs-semibold text-brand-500 hover:opacity-80">
           <span>Details</span>
           <ArrowUpRight className="size-3" strokeWidth={2.25} />
         </button>
       </div>
-      <p className="mt-1 text-xs text-chart-legend">
+      <p className="mt-1 t-xs-regular text-chart-legend">
         {pipeline.totalDeals} deals across {pipeline.totalStages} stages
         &middot; {pipeline.totalValue} total value
       </p>

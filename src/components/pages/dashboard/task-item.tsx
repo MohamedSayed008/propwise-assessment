@@ -43,7 +43,7 @@ export function TaskItem({ task, onToggle }: TaskItemProps) {
       <div className="min-w-0 flex-1">
         <p
           className={cn(
-            'text-sm font-medium',
+            't-sm-medium',
             task.completed
               ? 'text-content-muted line-through'
               : 'text-content-default'
@@ -54,7 +54,7 @@ export function TaskItem({ task, onToggle }: TaskItemProps) {
         <div className="mt-1 flex items-center gap-2">
           <span
             className={cn(
-              'flex items-center gap-1 text-xs',
+              'flex items-center gap-1 t-xs-regular',
               task.isOverdue && !task.completed
                 ? 'font-medium text-status-danger'
                 : 'text-content-subtle'
@@ -63,7 +63,7 @@ export function TaskItem({ task, onToggle }: TaskItemProps) {
             <Clock className="h-3 w-3" />
             {task.dueLabel}
           </span>
-          <span className="text-xs text-content-muted">
+          <span className="t-xs-regular text-content-muted">
             {typeLabelMap[task.type]}
           </span>
         </div>
@@ -72,7 +72,7 @@ export function TaskItem({ task, onToggle }: TaskItemProps) {
       {/* Priority */}
       <span
         className={cn(
-          'shrink-0 rounded-full px-1.25 py-px text-2xs font-semibold capitalize leading-[15px]',
+          'shrink-0 rounded-full px-1.25 py-px t-xxs-semibold capitalize',
           priorityClasses[task.priority]
         )}
       >

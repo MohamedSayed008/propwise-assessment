@@ -86,7 +86,7 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
       <Link
         href={item.href}
         className={cn(
-          'flex w-full items-center gap-2 rounded-md p-2 text-sm font-medium leading-4 transition-colors',
+          'flex w-full items-center gap-2 rounded-md p-2 t-sm-medium transition-colors',
           active
             ? 'bg-brand-50 text-brand-700'
             : 'text-content-default hover:bg-surface-subtle'
@@ -132,7 +132,7 @@ function SidebarContent() {
                 <span className="absolute inset-e-0 top-0 z-10 h-2 w-2 rounded-full border border-surface-muted bg-destructive" />
               </Avatar>
               <div className="flex-1 min-w-0 text-start">
-                <p className="text-sm font-medium leading-4 text-content-default truncate">
+                <p className="t-sm-medium text-content-default truncate">
                   Lina Rahman
                 </p>
                 <div className="mt-0.5 flex items-center gap-1.5">
@@ -248,7 +248,7 @@ function SidebarContent() {
 
         {/* CRM group */}
         <div className="mt-3">
-          <p className="px-2 pb-3 text-xs text-content-subtle">CRM</p>
+          <p className="px-2 pb-3 t-xs-regular text-content-subtle">CRM</p>
           <ul className="space-y-0.5">
             {crmItems.map(item => (
               <NavLink
@@ -262,7 +262,9 @@ function SidebarContent() {
 
         {/* Workspace group */}
         <div className="mt-3">
-          <p className="px-2 pb-3 text-xs text-content-subtle">Workspace</p>
+          <p className="px-2 pb-3 t-xs-regular text-content-subtle">
+            Workspace
+          </p>
           <ul className="space-y-0.5">
             {workspaceItems.map(item => (
               <NavLink
@@ -289,7 +291,7 @@ function SidebarContent() {
         {/* Theme toggle */}
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className="mt-1 flex w-full cursor-pointer items-center gap-2 rounded-md p-2 text-sm font-medium leading-4 text-content-subtle hover:bg-surface-subtle transition-colors"
+          className="mt-1 flex w-full cursor-pointer items-center gap-2 rounded-md p-2 t-sm-medium text-content-subtle hover:bg-surface-subtle transition-colors"
         >
           {theme === 'dark' ? (
             <Sun className="h-4 w-4" />

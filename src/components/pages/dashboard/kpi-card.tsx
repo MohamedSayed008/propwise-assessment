@@ -15,10 +15,8 @@ export function KpiCard({ kpi }: KpiCardProps) {
   return (
     <div className="flex items-center justify-between rounded-lg border border-edge-subtle bg-surface px-4 py-3 shadow-xs">
       <div className="min-w-0">
-        <p className="text-xs font-medium leading-5 text-content-subtle">
-          {kpi.label}
-        </p>
-        <p className="mt-2 text-base font-semibold leading-5 text-content-emphasis">
+        <p className="t-xs-medium text-content-subtle">{kpi.label}</p>
+        <p className="mt-2 t-base-semibold text-content-emphasis">
           {kpi.value}
         </p>
       </div>
@@ -26,7 +24,7 @@ export function KpiCard({ kpi }: KpiCardProps) {
         <SparklineChart data={kpi.sparklineData} />
         <div
           className={cn(
-            'inline-flex items-center gap-0.5 rounded-full px-0.75 py-0.5 text-2xs font-semibold',
+            'inline-flex items-center gap-0.5 rounded-full px-0.75 py-0.5 t-xxs-semibold',
             isUp ? 'bg-kpi-trend-bg text-sparkline' : 'text-status-danger'
           )}
         >

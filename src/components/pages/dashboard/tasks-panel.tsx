@@ -89,22 +89,20 @@ export function TasksPanel() {
     <div className="rounded-lg border border-edge-subtle bg-surface p-6 shadow-xs">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-semibold text-content-emphasis">
+        <h2 className="t-base-semibold text-content-emphasis">
           Tasks &amp; Reminders
         </h2>
-        <button className="text-sm font-medium text-brand-500 hover:underline">
+        <button className="t-sm-medium text-brand-500 hover:underline">
           + Quick add
         </button>
       </div>
 
       {/* Progress */}
-      <div className="mt-3">
-        <div className="flex items-center justify-between text-xs text-content-subtle">
-          <span>
-            {tasks.completed}/{tasks.total} done
-          </span>
-        </div>
-        <Progress value={progressPct} className="mt-1.5 h-2" />
+      <div className="mt-3 flex items-center gap-2">
+        <Progress value={progressPct} className="h-1.5 flex-1" />
+        <span className="shrink-0 t-xxs-semibold text-dropdown-subtitle">
+          {tasks.completed}/{tasks.total} done
+        </span>
       </div>
 
       {/* Task list */}

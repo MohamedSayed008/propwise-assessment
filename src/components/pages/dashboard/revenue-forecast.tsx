@@ -39,10 +39,8 @@ export function RevenueForecast() {
     <div className="rounded-lg border border-edge-subtle bg-surface px-5 py-4 shadow-xs">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-normal text-content-subtle">
-          Revenue Forecast
-        </h2>
-        <button className="inline-flex items-center gap-1 text-xs font-semibold text-brand-500 hover:opacity-80">
+        <h2 className="t-sm-regular text-content-subtle">Revenue Forecast</h2>
+        <button className="inline-flex items-center gap-1 t-xs-semibold text-brand-500 hover:opacity-80">
           <span>Report</span>
           <ArrowUpRight className="size-3" strokeWidth={2.25} />
         </button>
@@ -50,11 +48,9 @@ export function RevenueForecast() {
 
       {/* Value + Trend */}
       <div className="mt-1 flex flex-wrap items-end gap-2.5">
-        <p className="font-heading text-heading-lg font-bold leading-7 tracking-tight text-content-emphasis">
-          {revenue.total}
-        </p>
+        <p className="t-heading-lg text-content-emphasis">{revenue.total}</p>
         <div className="flex items-end gap-1">
-          <span className="inline-flex items-center gap-0.5 rounded-full bg-kpi-trend-bg px-1 py-0.5 text-2xs font-semibold text-sparkline">
+          <span className="inline-flex items-center gap-0.5 rounded-full bg-kpi-trend-bg px-1 py-0.5 t-xxs-semibold text-sparkline">
             <TrendingUp className="size-2.5" strokeWidth={2.25} />+
             {revenue.trend}%
           </span>

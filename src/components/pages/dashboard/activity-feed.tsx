@@ -35,9 +35,7 @@ export function ActivityFeed() {
     <div className="overflow-clip rounded-dropdown-menu border border-dropdown-border bg-surface shadow-xs">
       {/* Header */}
       <div className="border-b border-dropdown-divider px-5 py-4">
-        <h2 className="font-heading text-base font-medium text-content-emphasis">
-          Activity Feed
-        </h2>
+        <h2 className="t-base-medium text-content-emphasis">Activity Feed</h2>
       </div>
 
       {/* Groups */}
@@ -46,7 +44,7 @@ export function ActivityFeed() {
           <div key={group.label}>
             {/* Group label */}
             <div className="border-b border-dropdown-divider bg-surface-muted px-5 py-2.5">
-              <p className="font-heading text-2xs font-bold uppercase tracking-[0.5px] text-dropdown-subtitle">
+              <p className="t-heading-xxs-bold uppercase text-dropdown-subtitle">
                 {group.label}
               </p>
             </div>
@@ -64,7 +62,7 @@ export function ActivityFeed() {
 
       {/* Footer */}
       <div className="border-t border-dropdown-divider px-5 py-3">
-        <button className="flex w-full cursor-pointer items-center justify-center gap-1 text-xs font-semibold text-brand-500 hover:opacity-80">
+        <button className="flex w-full cursor-pointer items-center justify-center gap-1 t-xs-semibold text-brand-500 hover:opacity-80">
           View full activity log
           <ArrowUpRight className="h-3 w-3" strokeWidth={2.25} />
         </button>
