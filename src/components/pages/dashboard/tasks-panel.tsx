@@ -2,7 +2,7 @@
 
 import { useAtom, useAtomValue } from 'jotai';
 import { RotateCcw } from 'lucide-react';
-import { tasksAtom, dashboardLoadingAtom, dashboardDataAtom } from '@/store';
+import { dashboardDataAtom, dashboardLoadingAtom, tasksAtom } from '@/store';
 import { TaskItem } from './task-item';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';

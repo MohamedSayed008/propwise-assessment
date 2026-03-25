@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { Clock } from 'lucide-react';
-import { CheckboxCircle } from '@/components/ui/checkbox-circle';
+import { Checkbox } from '@/components/ui/checkbox';
 import type { Task } from '@/types/dashboard';
 
 const typeLabelMap: Record<Task['type'], string> = {
@@ -13,9 +13,9 @@ const typeLabelMap: Record<Task['type'], string> = {
 };
 
 const priorityClasses: Record<Task['priority'], string> = {
-  low: 'text-status-success',
-  med: 'text-status-warning',
-  high: 'text-status-danger',
+  low: 'bg-priority-low-bg text-priority-low-text',
+  med: 'bg-priority-med-bg text-priority-med-text',
+  high: 'bg-priority-high-bg text-priority-high-text',
 };
 
 interface TaskItemProps {
@@ -31,9 +31,10 @@ export function TaskItem({ task, onToggle }: TaskItemProps) {
         task.isOverdue && !task.completed && 'bg-status-danger-subtle'
       )}
     >
-      <CheckboxCircle
+      <Checkbox
+        variant="circle"
         checked={task.completed}
-        onChange={() => onToggle(task.id)}
+        onCheckedChange={() => onToggle(task.id)}
         className="mt-0.5"
         aria-label={task.completed ? 'Mark incomplete' : 'Mark complete'}
       />
@@ -71,7 +72,7 @@ export function TaskItem({ task, onToggle }: TaskItemProps) {
       {/* Priority */}
       <span
         className={cn(
-          'shrink-0 text-xs font-medium capitalize',
+          'shrink-0 rounded-full px-1.25 py-px text-2xs font-semibold capitalize leading-[15px]',
           priorityClasses[task.priority]
         )}
       >

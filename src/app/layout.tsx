@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { Figtree, Inter } from 'next/font/google';
+import { Figtree, IBM_Plex_Mono, Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
@@ -17,6 +17,12 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  variable: '--font-ibm-plex-mono',
+  weight: ['500'],
+});
+
 export const metadata: Metadata = {
   title: 'PropWise CRM Dashboard',
   description: 'Real estate CRM dashboard for sales pipeline management',
@@ -31,7 +37,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(figtree.variable, inter.variable)}
+      className={cn(figtree.variable, inter.variable, ibmPlexMono.variable)}
     >
       <body className="min-h-screen">
         <ThemeProvider

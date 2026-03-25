@@ -8,7 +8,8 @@
   /* Fonts */
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-mono: var(--font-sf-mono), 'SFMono-Regular', 'SF Mono', ui-monospace, monospace;
+  --font-mono-alt: var(--font-ibm-plex-mono), ui-monospace, monospace;
   --font-heading: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 
   /* Spacing tokens */
@@ -28,6 +29,7 @@
 
   /* Letter spacing */
   --tracking-dashboard: 0.01em;
+  --tracking-title: 0.01em;
 
   /* Component radii */
   --radius-dropdown-menu: 14px;
@@ -38,12 +40,32 @@
   --text-3xs--line-height: 10px;
   --text-2xs: 10px;
   --text-2xs--line-height: 12px;
+  --text-label-xs: 10px;
+  --text-label-xs--line-height: 10px;
   --text-chart: 11px;
   --text-chart--line-height: 14px;
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 12px;
   --text-menu: 12.5px;
   --text-menu--line-height: 16px;
   --text-search: 13px;
   --text-search--line-height: 16px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 16px;
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+  --text-mono-md: 14px;
+  --text-mono-md--line-height: 16px;
+  --text-label-lg: 16px;
+  --text-label-lg--line-height: 16px;
+  --text-mono-xs: 10px;
+  --text-mono-xs--line-height: 16px;
+  --text-title-3: 20px;
+  --text-title-3--line-height: 20px;
+  --text-title-2: 24px;
+  --text-title-2--line-height: 24px;
+  --text-title-1: 28px;
+  --text-title-1--line-height: 28px;
   --text-heading-lg: 28px;
   --text-heading-lg--line-height: 28px;
 
@@ -138,6 +160,14 @@
   --color-kpi-trend-bg: #F0FDF4;
   --color-chart-legend: #6E7991;
   --color-activity-link: #476CDC;
+
+  /* Priority pill backgrounds */
+  --color-priority-low-bg: #F0FDF4;
+  --color-priority-low-text: #188540;
+  --color-priority-med-bg: #FEF7EE;
+  --color-priority-med-text: #B34A22;
+  --color-priority-high-bg: #FCF2F2;
+  --color-priority-high-text: #AA2E26;
 
   /* Dropdown menu */
   --color-dropdown-border: var(--dropdown-border);
@@ -272,7 +302,8 @@
   /* next/font fallbacks for editor/static CSS tooling */
   --font-figtree: 'Figtree', ui-sans-serif, system-ui, sans-serif;
   --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-geist-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-sf-mono: 'SF Mono', 'SFMono-Regular', ui-monospace, monospace;
+  --font-ibm-plex-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   /* Background */
   --bg-emphasis: #E5E7EB;
@@ -437,5 +468,120 @@
   }
   button:disabled {
     cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  .type-title-1 {
+    @apply font-heading text-title-1 font-extrabold tracking-title;
+  }
+
+  .type-title-2 {
+    @apply font-heading text-title-2 font-extrabold tracking-title;
+  }
+
+  .type-title-3 {
+    @apply font-heading text-title-3 font-extrabold tracking-title;
+  }
+
+
+  .type-leading-none-text-sm-normal {
+    @apply font-body text-body-sm font-normal;
+  }
+
+  .type-leading-none-text-sm-medium {
+    @apply font-body text-body-sm font-medium;
+  }
+
+  .type-leading-none-text-sm-semibold {
+    @apply font-body text-body-sm font-semibold;
+  }
+
+  .type-leading-none-text-sm-mono {
+    @apply font-mono text-mono-md font-normal;
+  }
+
+  .type-leading-none-text-xs-normal {
+    @apply font-body text-label-sm font-normal;
+  }
+
+  .type-leading-none-text-xs-medium {
+    @apply font-body text-label-sm font-medium;
+  }
+
+  .type-leading-none-text-xs-semibold {
+    @apply font-body text-label-sm font-semibold;
+  }
+
+  .type-leading-none-text-xxs-regular {
+    @apply font-body text-label-xs font-medium;
+  }
+
+  .type-leading-none-text-xxs-semibold {
+    @apply font-body text-label-xs font-semibold;
+  }
+
+  .type-leading-normal-text-sm-normal {
+    @apply font-body text-body-md font-normal;
+  }
+
+  .type-leading-normal-text-sm-medium {
+    @apply font-body text-body-md font-medium;
+  }
+
+  .type-leading-normal-text-xs-mono {
+    @apply font-mono-alt text-mono-xs;
+  }
+
+  .type-base-semibold {
+    @apply font-body text-label-lg font-semibold;
+  }
+
+  .type-sm-regular {
+    @apply font-body text-body-sm font-normal;
+  }
+
+  .type-sm-medium {
+    @apply font-body text-body-sm font-medium;
+  }
+
+  .type-sm-semibold {
+    @apply font-body text-body-sm font-semibold;
+  }
+
+  .type-sm-regular-relaxed {
+    @apply font-body text-body-md font-normal;
+  }
+
+  .type-sm-medium-relaxed {
+    @apply font-body text-body-md font-medium;
+  }
+
+  .type-xs-regular {
+    @apply font-body text-label-sm font-normal;
+  }
+
+  .type-xs-medium {
+    @apply font-body text-label-sm font-medium;
+  }
+
+  .type-xs-semibold {
+    @apply font-body text-label-sm font-semibold;
+  }
+
+  .type-xxs-regular {
+    @apply font-body text-label-xs font-medium;
+  }
+
+  .type-xxs-semibold {
+    @apply font-body text-label-xs font-semibold;
+  }
+
+  .type-mono-sm {
+    @apply font-mono text-mono-md font-normal;
+  }
+
+  .type-mono-xs {
+    @apply font-mono-alt text-mono-xs;
   }
 }
