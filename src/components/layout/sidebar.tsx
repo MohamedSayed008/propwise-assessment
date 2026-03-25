@@ -3,7 +3,12 @@
 import type { ElementType } from 'react';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
 import {
   Bell,
   ChevronRight,
@@ -292,7 +297,8 @@ export function Sidebar() {
               <Menu className="h-5 w-5 text-content-default" />
             </button>
           </DrawerTrigger>
-          <DrawerContent>
+          <DrawerContent aria-describedby={undefined}>
+            <DrawerTitle className="sr-only">Navigation drawer</DrawerTitle>
             <SidebarContent />
           </DrawerContent>
         </Drawer>
