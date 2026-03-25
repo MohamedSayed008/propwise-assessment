@@ -70,7 +70,10 @@ const activityGroups: { label: string; entries: ActivityEntry[] }[] = [
       {
         id: 'a1',
         message: 'You were assigned a new lead: Ahmed Al-Rashid',
-        highlights: [{ text: 'Ahmed Al-Rashid', type: 'person' }],
+        highlights: [
+          { text: 'You', type: 'person' },
+          { text: 'Ahmed Al-Rashid', type: 'person' },
+        ],
         timestamp: new Date().toISOString(),
         relativeTime: '10 min ago',
         icon: 'lead',
@@ -78,7 +81,10 @@ const activityGroups: { label: string; entries: ActivityEntry[] }[] = [
       {
         id: 'a2',
         message: 'System transferred deal to Negotiation stage',
-        highlights: [{ text: 'Negotiation', type: 'stage' }],
+        highlights: [
+          { text: 'System', type: 'person' },
+          { text: 'Negotiation stage', type: 'stage' },
+        ],
         timestamp: new Date().toISOString(),
         relativeTime: '25 min ago',
         icon: 'deal',
@@ -98,41 +104,6 @@ const activityGroups: { label: string; entries: ActivityEntry[] }[] = [
         timestamp: new Date().toISOString(),
         relativeTime: '1h ago',
         icon: 'call',
-      },
-    ],
-  },
-  {
-    label: 'YESTERDAY',
-    entries: [
-      {
-        id: 'a4',
-        message: 'Commission of AED 12,400 confirmed for Deal #892',
-        highlights: [
-          { text: 'AED 12,400', type: 'deal' },
-          { text: 'Deal #892', type: 'deal' },
-        ],
-        timestamp: new Date().toISOString(),
-        relativeTime: 'Yesterday',
-        icon: 'commission',
-      },
-      {
-        id: 'a5',
-        message: 'You added a note to Marina Heights Development',
-        highlights: [{ text: 'Marina Heights Development', type: 'deal' }],
-        timestamp: new Date().toISOString(),
-        relativeTime: 'Yesterday',
-        icon: 'note',
-      },
-      {
-        id: 'a6',
-        message: 'Email sent to Fatima Al-Sayed regarding Palm Views',
-        highlights: [
-          { text: 'Fatima Al-Sayed', type: 'person' },
-          { text: 'Palm Views', type: 'deal' },
-        ],
-        timestamp: new Date().toISOString(),
-        relativeTime: 'Yesterday',
-        icon: 'email',
       },
     ],
   },

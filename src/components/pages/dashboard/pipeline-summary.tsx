@@ -3,12 +3,92 @@
 import { useAtomValue } from 'jotai';
 import { dashboardLoadingAtom, pipelineAtom } from '@/store';
 import { Skeleton } from '@/components/ui/skeleton';
-import { motion } from 'framer-motion';
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { ArrowUpRight } from 'lucide-react';
 
 function formatValue(value: number, currency: string): string {
   if (value >= 1000000) return `${currency} ${(value / 1000000).toFixed(1)}M`;
   if (value >= 1000) return `${currency} ${Math.round(value / 1000)}K`;
   return `${currency} ${value}`;
+}
+
+interface ChartEntry {
+  stage: string;
+  value: number;
+  count: number;
+  currency: string;
+}
+
+/** Custom bar shape that renders the Figma pill (count + value) inside */
+function PipelineBar(props: {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  payload?: ChartEntry;
+}) {
+  const { x = 0, y = 0, width = 0, height = 0, payload } = props;
+  if (!payload || width <= 0) return null;
+
+  const countText = String(payload.count);
+  const valueText = formatValue(payload.value, payload.currency);
+  // Approximate character widths: count at 11px bold ≈ 7px/char, value at 10px ≈ 6px/char
+  const countWidth = countText.length * 7;
+  const valueWidth = valueText.length * 6;
+  const gap = 6;
+  const pillPx = 6; // horizontal padding
+  const pillPy = 3; // vertical padding
+  const pillWidth = pillPx + countWidth + gap + valueWidth + pillPx;
+  const pillHeight = height - pillPy * 2;
+  const pillY = y + pillPy;
+  const barInset = 6; // pill offset from bar edge
+  const countX = x + barInset + pillPx;
+  const valueX = countX + countWidth + gap;
+
+  return (
+    <g>
+      {/* Bar background */}
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        rx={6}
+        fill="var(--color-brand-900)"
+      />
+      {/* Pill — sized to content */}
+      <rect
+        x={x + barInset}
+        y={pillY}
+        width={Math.min(pillWidth, width - barInset * 2)}
+        height={pillHeight}
+        rx={6}
+        fill="rgba(255,255,255,0.2)"
+      />
+      {/* Count */}
+      <text
+        x={countX}
+        y={y + height / 2}
+        dominantBaseline="central"
+        fontSize={11}
+        fontWeight={700}
+        fill="white"
+      >
+        {countText}
+      </text>
+      {/* Value */}
+      <text
+        x={valueX}
+        y={y + height / 2}
+        dominantBaseline="central"
+        fontSize={10}
+        fontWeight={500}
+        fill="rgba(255,255,255,0.7)"
+      >
+        {formatValue(payload.value, payload.currency)}
+      </text>
+    </g>
+  );
 }
 
 export function PipelineSummary() {
@@ -29,53 +109,61 @@ export function PipelineSummary() {
     );
   }
 
-  const maxValue = Math.max(...pipeline.stages.map(s => s.value));
+  const chartData: ChartEntry[] = pipeline.stages.map(s => ({
+    stage: s.stage,
+    value: s.value,
+    count: s.count,
+    currency: s.currency,
+  }));
 
   return (
     <div className="rounded-lg border border-edge-subtle bg-surface p-6 shadow-xs">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-semibold text-content-emphasis">
+        <h2 className="text-base font-medium text-content-emphasis">
           Pipeline Summary
         </h2>
-        <button className="text-sm font-medium text-brand-500 hover:underline">
-          Details &rarr;
+        <button className="inline-flex items-center gap-1 text-xs font-semibold text-brand-500 hover:opacity-80">
+          <span>Details</span>
+          <ArrowUpRight className="size-3" strokeWidth={2.25} />
         </button>
       </div>
-      <p className="mt-1 text-xs text-content-subtle">
+      <p className="mt-1 text-xs text-chart-legend">
         {pipeline.totalDeals} deals across {pipeline.totalStages} stages
         &middot; {pipeline.totalValue} total value
       </p>
 
-      {/* Bars */}
-      <div className="mt-5 space-y-3">
-        {pipeline.stages.map(stage => {
-          const widthPct = maxValue > 0 ? (stage.value / maxValue) * 100 : 0;
-          return (
-            <div key={stage.stage} className="flex items-center gap-3">
-              <span className="w-20 shrink-0 text-sm font-medium text-content-default">
-                {stage.stage}
-              </span>
-              <div className="relative h-8 flex-1 overflow-hidden rounded-md bg-surface-subtle">
-                <motion.div
-                  className="absolute inset-y-0 inset-inline-start-0 flex items-center rounded-md bg-brand-900 px-2 dark:bg-brand-400"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${Math.max(widthPct, 15)}%` }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
-                >
-                  <span className="flex items-center gap-2 whitespace-nowrap rounded-md bg-primary-foreground/20 px-1.5 py-0.75">
-                    <span className="font-heading text-xs font-bold text-primary-foreground">
-                      {stage.count}
-                    </span>
-                    <span className="text-2xs font-medium text-primary-foreground/70">
-                      {formatValue(stage.value, stage.currency)}
-                    </span>
-                  </span>
-                </motion.div>
-              </div>
-            </div>
-          );
-        })}
+      {/* Chart */}
+      <div className="mt-5 h-60">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={chartData}
+            layout="vertical"
+            barCategoryGap={8}
+            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+          >
+            <XAxis type="number" hide />
+            <YAxis
+              type="category"
+              dataKey="stage"
+              axisLine={false}
+              tickLine={false}
+              width={80}
+              tick={{
+                fontSize: 13,
+                fill: 'var(--content-default)',
+                fontWeight: 500,
+              }}
+            />
+            <Bar
+              dataKey="value"
+              animationDuration={800}
+              animationEasing="ease-out"
+              background={{ fill: 'var(--bg-subtle)', radius: 6 }}
+              shape={<PipelineBar />}
+            />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
