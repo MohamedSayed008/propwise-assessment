@@ -12,9 +12,9 @@
   --font-heading: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 
   /* Spacing tokens */
-  --spacing-075: 3px;
-  --spacing-125: 5px;
-  --spacing-225: 9px;
+  --spacing-0.75: 3px;
+  --spacing-1.25: 5px;
+  --spacing-2.25: 9px;
   --spacing-sidebar-dropdown: 231px;
 
   /* Breakpoints */
@@ -38,6 +38,8 @@
   --text-3xs--line-height: 10px;
   --text-2xs: 10px;
   --text-2xs--line-height: 12px;
+  --text-chart: 11px;
+  --text-chart--line-height: 14px;
   --text-menu: 12.5px;
   --text-menu--line-height: 16px;
   --text-search: 13px;
@@ -131,9 +133,11 @@
   --color-purple-800: #2B0D43;
   --color-purple-900: #200A32;
 
-  /* Sparkline / KPI trend */
+  /* Sparkline / KPI trend / Chart */
   --color-sparkline: #188540;
   --color-kpi-trend-bg: #F0FDF4;
+  --color-chart-legend: #6E7991;
+  --color-activity-link: #476CDC;
 
   /* Dropdown menu */
   --color-dropdown-border: var(--dropdown-border);
@@ -153,6 +157,7 @@
   --shadow-dropdown: 0px 2px 6px -1px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.08);
   --shadow-dropdown-menu: 0px -6px 28px 0px rgba(18, 32, 76, 0.1), 0px -1px 4px 0px rgba(18, 32, 76, 0.05);
   --shadow-toast: 0px 1px 1px 0px rgba(0,0,0,0.07), 0px 1px 2px 0px rgba(0,0,0,0.08), 0px 2px 2px 0px rgba(0,0,0,0.1), 0px 0px 8px 0px rgba(0,0,0,0.05);
+  --shadow-tab-active: 0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
   --shadow-focus-button: 0px 0px 0px 2px rgba(128, 128, 128, 0.3);
   --shadow-focus-button-destructive: 0px 0px 0px 2px rgba(240, 62, 63, 0.3);
 

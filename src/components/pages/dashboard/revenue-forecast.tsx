@@ -15,8 +15,8 @@ import {
 } from 'recharts';
 
 function formatAxisValue(value: number): string {
-  if (value >= 1000) return `AED ${Math.round(value / 1000)}K`;
-  return `AED ${value}K`;
+  if (value >= 1000) return `$${Math.round(value / 1000)}K`;
+  return `$${value}`;
 }
 
 const revenueTicks = [0, 60000, 120000, 180000, 240000];
@@ -65,12 +65,12 @@ export function RevenueForecast() {
       </div>
 
       {/* Legend */}
-      <div className="mt-4 flex items-center gap-5 text-2xs text-content-default">
+      <div className="mt-4 flex items-center gap-5 text-chart text-chart-legend">
         <span className="flex items-center gap-1.5">
           <span className="inline-block h-0.75 w-3 rounded-full bg-brand-500" />
           This year
         </span>
-        <span className="flex items-center gap-1.5 text-content-subtle">
+        <span className="flex items-center gap-1.5">
           <span className="inline-block h-0.75 w-3 rounded-full bg-edge" />
           Last year
         </span>
@@ -81,7 +81,7 @@ export function RevenueForecast() {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={revenue.data}
-            margin={{ top: 6, right: 0, bottom: 10, left: 8 }}
+            margin={{ top: 14, right: 0, bottom: 10, left: 8 }}
           >
             <defs>
               <linearGradient id="thisYearGrad" x1="0" y1="0" x2="0" y2="1">
@@ -114,23 +114,43 @@ export function RevenueForecast() {
               tickLine={false}
               tickFormatter={formatAxisValue}
               tick={{ fontSize: 11, fill: 'var(--content-muted)' }}
-              width={56}
+              width={60}
               ticks={revenueTicks}
               domain={[0, 240000]}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: 'var(--bg-default)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: '8px',
-                fontSize: '12px',
-                boxShadow: 'var(--shadow-sm)',
-              }}
               cursor={{
                 stroke: 'var(--border-subtle)',
                 strokeDasharray: '2 3',
               }}
-              formatter={value => [`AED ${Number(value).toLocaleString()}`, '']}
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null;
+                const thisYear = payload.find(p => p.dataKey === 'thisYear');
+                const lastYear = payload.find(p => p.dataKey === 'lastYear');
+                return (
+                  <div className="rounded-lg border border-edge-subtle bg-surface px-3 py-2 text-xs shadow-sm">
+                    <p className="mb-1 font-medium text-content-muted">
+                      {label}
+                    </p>
+                    {thisYear && (
+                      <p className="text-content-emphasis">
+                        This year:{' '}
+                        <span className="font-semibold">
+                          AED {Number(thisYear.value).toLocaleString()}
+                        </span>
+                      </p>
+                    )}
+                    {lastYear && (
+                      <p className="mt-0.5 text-content-subtle">
+                        Last year:{' '}
+                        <span className="font-semibold">
+                          AED {Number(lastYear.value).toLocaleString()}
+                        </span>
+                      </p>
+                    )}
+                  </div>
+                );
+              }}
             />
             <Area
               type="monotone"

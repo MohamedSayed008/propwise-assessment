@@ -7,10 +7,10 @@ export function DashboardHeader() {
   return (
     <div className="flex flex-col gap-3 mt-10 desktop-s:mt-0 tablet-s:flex-row tablet-s:items-start tablet-s:justify-between">
       <div>
-        <h1 className="hidden desktop-s:block font-heading text-2xl font-extrabold tracking-dashboard text-content-emphasis">
+        <h1 className="hidden desktop-s:block font-heading text-xl font-bold leading-5 tracking-[0.2px] text-content-emphasis">
           Dashboard
         </h1>
-        <p className="mt-1 text-sm text-content-subtle">
+        <p className="mt-2 text-sm text-content-subtle">
           Here&apos;s your pipeline health and sales activity at a glance.
         </p>
       </div>
@@ -20,6 +20,7 @@ export function DashboardHeader() {
         aria-label="Create new item"
         variant="default"
         size="default"
+        className="w-22.25 ms-auto"
       >
         + Create
       </Button>

@@ -14,18 +14,17 @@ import { Toaster as Sonner, type ToasterProps } from 'sonner';
 
 const iconClassName = 'size-4 shrink-0';
 
-const Toaster = ({ ...props }: ToasterProps) => {
+export const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = 'system' } = useTheme();
 
   return (
     <Sonner
       theme={theme as ToasterProps['theme']}
-      // TODO: RTL — Sonner's position prop does not support logical values; may need manual override for RTL layouts
       position="bottom-right"
       gap={8}
       closeButton
-      offset={24}
-      visibleToasts={1}
+      offset={{ bottom: 24, right: 64 }}
+      visibleToasts={3}
       icons={{
         success: (
           <HugeiconsIcon
@@ -68,7 +67,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         unstyled: true,
         classNames: {
           toast:
-            'group relative inline-flex min-h-9 items-center gap-2 rounded-md border border-transparent bg-toast ps-4 pe-9 font-body text-toast-text shadow-toast data-[type=error]:bg-toast-error data-[type=error]:text-toast-error-text',
+            'group relative inline-flex min-h-9 items-center gap-2 rounded-md border border-transparent bg-toast ps-4 pe-9 font-body text-toast-text shadow-toast data-[type=success]:bg-surface-success data-[type=success]:text-content-success data-[type=error]:bg-toast-error data-[type=error]:text-toast-error-text',
           content: 'flex min-w-0 items-center pe-1',
           title: 'truncate text-sm font-semibold leading-4 text-current',
           description: 'text-sm leading-4 text-current',
@@ -85,5 +84,3 @@ const Toaster = ({ ...props }: ToasterProps) => {
     />
   );
 };
-
-export { Toaster };

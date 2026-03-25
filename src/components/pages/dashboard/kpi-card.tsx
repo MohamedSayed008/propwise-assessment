@@ -13,10 +13,12 @@ export function KpiCard({ kpi }: KpiCardProps) {
   const isUp = kpi.trendDirection === 'up';
 
   return (
-    <div className="flex items-start justify-between rounded-lg border border-edge-subtle bg-surface p-4 shadow-xs">
+    <div className="flex items-center justify-between rounded-lg border border-edge-subtle bg-surface px-4 py-3 shadow-xs">
       <div className="min-w-0">
-        <p className="text-xs text-content-subtle">{kpi.label}</p>
-        <p className="mt-1 font-heading text-2xl font-extrabold tracking-dashboard text-content-emphasis">
+        <p className="text-xs font-medium leading-5 text-content-subtle">
+          {kpi.label}
+        </p>
+        <p className="mt-2 text-base font-semibold leading-5 text-content-emphasis">
           {kpi.value}
         </p>
       </div>
@@ -24,14 +26,14 @@ export function KpiCard({ kpi }: KpiCardProps) {
         <SparklineChart data={kpi.sparklineData} />
         <div
           className={cn(
-            'inline-flex items-center gap-1 rounded-full p-0.75 text-xs font-medium',
+            'inline-flex items-center gap-0.5 rounded-full px-0.75 py-0.5 text-2xs font-semibold',
             isUp ? 'bg-kpi-trend-bg text-sparkline' : 'text-status-danger'
           )}
         >
           {isUp ? (
-            <TrendingUp className="h-3 w-3" />
+            <TrendingUp className="h-2.5 w-2.5" strokeWidth={2.25} />
           ) : (
-            <TrendingDown className="h-3 w-3" />
+            <TrendingDown className="h-2.5 w-2.5" strokeWidth={2.25} />
           )}
           +{kpi.trend}%
         </div>

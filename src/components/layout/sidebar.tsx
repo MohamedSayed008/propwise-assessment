@@ -1,6 +1,9 @@
 'use client';
 
+import type { ElementType } from 'react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import {
   Bell,
@@ -42,38 +45,49 @@ import Image from 'next/image';
 
 interface NavItem {
   label: string;
-  icon: React.ElementType;
-  active?: boolean;
+  icon: ElementType;
+  href: string;
   expandable?: boolean;
 }
 
 const crmItems: NavItem[] = [
-  { label: 'Inbox', icon: InboxIcon },
-  { label: 'Leads', icon: LeadsIcon, active: true },
-  { label: 'Deals', icon: DealsIcon },
-  { label: 'Contacts', icon: ContactsIcon },
-  { label: 'Tasks', icon: TasksIcon },
-  { label: 'Calendar', icon: CalendarIcon },
+  { label: 'Inbox', icon: InboxIcon, href: '/inbox' },
+  { label: 'Leads', icon: LeadsIcon, href: '/leads' },
+  { label: 'Deals', icon: DealsIcon, href: '/deals' },
+  { label: 'Contacts', icon: ContactsIcon, href: '/contacts' },
+  { label: 'Tasks', icon: TasksIcon, href: '/tasks' },
+  { label: 'Calendar', icon: CalendarIcon, href: '/calendar' },
 ];
 
 const workspaceItems: NavItem[] = [
-  { label: 'Properties', icon: PropertiesIcon, expandable: true },
-  { label: 'Marketing', icon: MarketingIcon, expandable: true },
-  { label: 'Reports', icon: ReportsIcon, expandable: true },
+  {
+    label: 'Properties',
+    icon: PropertiesIcon,
+    href: '/properties',
+    expandable: true,
+  },
+  {
+    label: 'Marketing',
+    icon: MarketingIcon,
+    href: '/marketing',
+    expandable: true,
+  },
+  { label: 'Reports', icon: ReportsIcon, href: '/reports', expandable: true },
 ];
 
 const bottomItems: NavItem[] = [
-  { label: 'Team', icon: TeamIcon },
-  { label: 'Settings', icon: SettingsIcon },
+  { label: 'Team', icon: TeamIcon, href: '/team' },
+  { label: 'Settings', icon: SettingsIcon, href: '/settings' },
 ];
 
-function NavLink({ item }: { item: NavItem }) {
+function NavLink({ item, active }: { item: NavItem; active: boolean }) {
   return (
     <li>
-      <button
+      <Link
+        href={item.href}
         className={cn(
-          'flex w-full cursor-pointer items-center gap-2 rounded-md p-2 text-sm font-medium leading-4 transition-colors',
-          item.active
+          'flex w-full items-center gap-2 rounded-md p-2 text-sm font-medium leading-4 transition-colors',
+          active
             ? 'bg-brand-50 text-brand-700'
             : 'text-content-default hover:bg-surface-subtle'
         )}
@@ -81,20 +95,21 @@ function NavLink({ item }: { item: NavItem }) {
         <item.icon
           className={cn(
             'h-4 w-4 shrink-0',
-            !item.active && 'text-nav-icon-inactive'
+            !active && 'text-nav-icon-inactive'
           )}
         />
         <span className="flex-1 text-start">{item.label}</span>
         {item.expandable && (
           <ChevronRight className="h-3 w-3 text-content-muted" />
         )}
-      </button>
+      </Link>
     </li>
   );
 }
 
 function SidebarContent() {
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
 
   return (
     <div className="flex h-full flex-col bg-surface-muted">
@@ -114,7 +129,7 @@ function SidebarContent() {
                     src="/Ellipse.png"
                   />
                 </div>
-                <span className="absolute end-0 top-0 z-10 h-2 w-2 rounded-full border border-surface-muted bg-destructive" />
+                <span className="absolute inset-e-0 top-0 z-10 h-2 w-2 rounded-full border border-surface-muted bg-destructive" />
               </Avatar>
               <div className="flex-1 min-w-0 text-start">
                 <p className="text-sm font-medium leading-4 text-content-default truncate">
@@ -157,10 +172,7 @@ function SidebarContent() {
             </div>
 
             <div className="flex items-center justify-between px-3.5 py-1.5 text-dropdown-item">
-              <span className="flex items-center gap-2.5">
-                <span className="h-2.25 w-2.25 rounded-full bg-status-online" />
-                Online
-              </span>
+              <span className="flex items-center gap-2.5">Online</span>
               <span className="rounded bg-kpi-trend-bg px-1.25 py-px text-3xs font-bold text-sparkline">
                 ACTIVE
               </span>
@@ -205,14 +217,14 @@ function SidebarContent() {
         {/* Search */}
 
         <div className="relative mb-3">
-          <Search className="absolute start-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-content-muted" />
+          <Search className="absolute inset-s-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-content-muted" />
           <input
             type="text"
             placeholder="Search"
             aria-label="Search"
             className="h-8.75 w-full rounded-md border border-dropdown-border bg-surface ps-8 pe-12 text-search text-content-default placeholder:text-content-muted outline-none"
           />
-          <div className="absolute end-2 top-1/2 flex -translate-y-1/2 items-center gap-0.75">
+          <div className="absolute inset-e-2 top-1/2 flex -translate-y-1/2 items-center gap-0.75">
             <kbd className="flex h-4.5 w-4.5 items-center justify-center rounded border border-dropdown-border bg-surface text-2xs text-content-muted dark:bg-surface-subtle">
               ⌘
             </kbd>
@@ -224,12 +236,14 @@ function SidebarContent() {
 
         {/* Dashboard */}
         <ul className="space-y-0.5">
-          <li>
-            <button className="flex w-full cursor-pointer items-center gap-2 rounded-md p-2 text-sm font-medium leading-4 text-content-default hover:bg-surface-subtle">
-              <DashboardIcon className="h-4 w-4 text-nav-icon-inactive" />
-              Dashboard
-            </button>
-          </li>
+          <NavLink
+            item={{
+              label: 'Dashboard',
+              icon: DashboardIcon,
+              href: '/dashboard',
+            }}
+            active={pathname === '/dashboard'}
+          />
         </ul>
 
         {/* CRM group */}
@@ -237,7 +251,11 @@ function SidebarContent() {
           <p className="px-2 pb-3 text-xs text-content-subtle">CRM</p>
           <ul className="space-y-0.5">
             {crmItems.map(item => (
-              <NavLink key={item.label} item={item} />
+              <NavLink
+                key={item.label}
+                item={item}
+                active={pathname === item.href}
+              />
             ))}
           </ul>
         </div>
@@ -247,7 +265,11 @@ function SidebarContent() {
           <p className="px-2 pb-3 text-xs text-content-subtle">Workspace</p>
           <ul className="space-y-0.5">
             {workspaceItems.map(item => (
-              <NavLink key={item.label} item={item} />
+              <NavLink
+                key={item.label}
+                item={item}
+                active={pathname === item.href}
+              />
             ))}
           </ul>
         </div>
@@ -257,7 +279,11 @@ function SidebarContent() {
       <div className="px-3 pb-3 pt-1">
         <ul className="space-y-0.5">
           {bottomItems.map(item => (
-            <NavLink key={item.label} item={item} />
+            <NavLink
+              key={item.label}
+              item={item}
+              active={pathname === item.href}
+            />
           ))}
         </ul>
         {/* Theme toggle */}
@@ -281,7 +307,7 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile header bar */}
-      <div className="bg-white fixed inset-x-0 top-0 z-50 flex items-center justify-between ps-3 pe-5 py-3 desktop-s:hidden">
+      <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-surface ps-3 pe-5 py-3 desktop-s:hidden">
         <Drawer direction="left">
           <DrawerTrigger asChild>
             <button
@@ -295,7 +321,7 @@ export function Sidebar() {
             <SidebarContent />
           </DrawerContent>
         </Drawer>
-        <h1 className="font-heading text-lg font-extrabold text-content-emphasis">
+        <h1 className="font-heading text-lg font-bold text-content-emphasis">
           Dashboard
         </h1>
       </div>
@@ -307,7 +333,7 @@ export function Sidebar() {
 
       {/* Help button — bottom-right floating */}
       <button
-        className="fixed bottom-5 end-5 z-40 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-surface-inverted text-content-inverted shadow-dropdown transition-transform hover:scale-105"
+        className="fixed bottom-5 inset-e-5 z-40 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-surface-inverted text-content-inverted shadow-dropdown transition-transform hover:scale-105"
         aria-label="Help"
       >
         <CircleHelp className="h-5 w-5" />
