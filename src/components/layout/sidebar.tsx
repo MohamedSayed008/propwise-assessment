@@ -2,7 +2,6 @@
 
 import type { ElementType } from 'react';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import {
@@ -46,45 +45,35 @@ import Image from 'next/image';
 interface NavItem {
   label: string;
   icon: ElementType;
-  href: string;
+  active?: boolean;
   expandable?: boolean;
 }
 
 const crmItems: NavItem[] = [
-  { label: 'Inbox', icon: InboxIcon, href: '/inbox' },
-  { label: 'Leads', icon: LeadsIcon, href: '/leads' },
-  { label: 'Deals', icon: DealsIcon, href: '/deals' },
-  { label: 'Contacts', icon: ContactsIcon, href: '/contacts' },
-  { label: 'Tasks', icon: TasksIcon, href: '/tasks' },
-  { label: 'Calendar', icon: CalendarIcon, href: '/calendar' },
+  { label: 'Inbox', icon: InboxIcon },
+  { label: 'Leads', icon: LeadsIcon },
+  { label: 'Deals', icon: DealsIcon },
+  { label: 'Contacts', icon: ContactsIcon },
+  { label: 'Tasks', icon: TasksIcon },
+  { label: 'Calendar', icon: CalendarIcon },
 ];
 
 const workspaceItems: NavItem[] = [
-  {
-    label: 'Properties',
-    icon: PropertiesIcon,
-    href: '/properties',
-    expandable: true,
-  },
-  {
-    label: 'Marketing',
-    icon: MarketingIcon,
-    href: '/marketing',
-    expandable: true,
-  },
-  { label: 'Reports', icon: ReportsIcon, href: '/reports', expandable: true },
+  { label: 'Properties', icon: PropertiesIcon, expandable: true },
+  { label: 'Marketing', icon: MarketingIcon, expandable: true },
+  { label: 'Reports', icon: ReportsIcon, expandable: true },
 ];
 
 const bottomItems: NavItem[] = [
-  { label: 'Team', icon: TeamIcon, href: '/team' },
-  { label: 'Settings', icon: SettingsIcon, href: '/settings' },
+  { label: 'Team', icon: TeamIcon },
+  { label: 'Settings', icon: SettingsIcon },
 ];
 
 function NavLink({ item, active }: { item: NavItem; active: boolean }) {
+  //TODO: use next link here for navigation once we create more pages other than dashboard
   return (
     <li>
-      <Link
-        href={item.href}
+      <button
         className={cn(
           'flex w-full items-center gap-2 rounded-md p-2 t-sm-medium transition-colors',
           active
@@ -102,7 +91,7 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
         {item.expandable && (
           <ChevronRight className="h-3 w-3 text-content-muted" />
         )}
-      </Link>
+      </button>
     </li>
   );
 }
@@ -237,11 +226,7 @@ function SidebarContent() {
         {/* Dashboard */}
         <ul className="space-y-0.5">
           <NavLink
-            item={{
-              label: 'Dashboard',
-              icon: DashboardIcon,
-              href: '/dashboard',
-            }}
+            item={{ label: 'Dashboard', icon: DashboardIcon }}
             active={pathname === '/dashboard'}
           />
         </ul>
@@ -251,11 +236,7 @@ function SidebarContent() {
           <p className="px-2 pb-3 t-xs-regular text-content-subtle">CRM</p>
           <ul className="space-y-0.5">
             {crmItems.map(item => (
-              <NavLink
-                key={item.label}
-                item={item}
-                active={pathname === item.href}
-              />
+              <NavLink key={item.label} item={item} active={false} />
             ))}
           </ul>
         </div>
@@ -267,11 +248,7 @@ function SidebarContent() {
           </p>
           <ul className="space-y-0.5">
             {workspaceItems.map(item => (
-              <NavLink
-                key={item.label}
-                item={item}
-                active={pathname === item.href}
-              />
+              <NavLink key={item.label} item={item} active={false} />
             ))}
           </ul>
         </div>
@@ -281,11 +258,7 @@ function SidebarContent() {
       <div className="px-3 pb-3 pt-1">
         <ul className="space-y-0.5">
           {bottomItems.map(item => (
-            <NavLink
-              key={item.label}
-              item={item}
-              active={pathname === item.href}
-            />
+            <NavLink key={item.label} item={item} active={false} />
           ))}
         </ul>
         {/* Theme toggle */}
