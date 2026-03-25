@@ -18,20 +18,19 @@ export function TasksPanel() {
     (id: string) => {
       if (!data) return;
 
-      const prevItems = data.tasks.items;
-      const updatedItems = prevItems.map(t =>
+      const toggled = data.tasks.items.find(t => t.id === id);
+      const wasCompleted = toggled?.completed ?? false;
+
+      const updatedItems = data.tasks.items.map(t =>
         t.id === id ? { ...t, completed: !t.completed } : t
       );
-      const completedCount = updatedItems.filter(t => t.completed).length;
-      const toggled = prevItems.find(t => t.id === id);
-      const wasCompleted = toggled?.completed ?? false;
 
       setData({
         ...data,
         tasks: {
           ...data.tasks,
           items: updatedItems,
-          completed: completedCount,
+          completed: updatedItems.filter(t => t.completed).length,
         },
       });
 
@@ -46,13 +45,20 @@ export function TasksPanel() {
               </span>
             ),
             onClick: () => {
-              setData({
-                ...data,
-                tasks: {
-                  ...data.tasks,
-                  items: prevItems,
-                  completed: prevItems.filter(t => t.completed).length,
-                },
+              // Toggle only this specific task back — reads current state, not a stale snapshot
+              setData(current => {
+                if (!current) return current;
+                const revertedItems = current.tasks.items.map(t =>
+                  t.id === id ? { ...t, completed: false } : t
+                );
+                return {
+                  ...current,
+                  tasks: {
+                    ...current.tasks,
+                    items: revertedItems,
+                    completed: revertedItems.filter(t => t.completed).length,
+                  },
+                };
               });
             },
           },
