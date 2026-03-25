@@ -45,48 +45,54 @@ function PipelineBar(props: {
   const countX = x + barInset + pillPx;
   const valueX = countX + countWidth + gap;
 
+  const showContent = width > barInset * 2 + 20;
+
   return (
     <g>
       {/* Bar background */}
       <rect
         x={x}
         y={y}
-        width={width}
+        width={Math.max(width, 0)}
         height={height}
         rx={6}
         fill="var(--color-brand-900)"
       />
-      {/* Pill — sized to content */}
-      <rect
-        x={x + barInset}
-        y={pillY}
-        width={Math.min(pillWidth, width - barInset * 2)}
-        height={pillHeight}
-        rx={6}
-        fill="rgba(255,255,255,0.2)"
-      />
-      {/* Count */}
-      <text
-        x={countX}
-        y={y + height / 2}
-        dominantBaseline="central"
-        fontSize={11}
-        fontWeight={700}
-        fill="white"
-      >
-        {countText}
-      </text>
-      {/* Value */}
-      <text
-        x={valueX}
-        y={y + height / 2}
-        dominantBaseline="central"
-        fontSize={10}
-        fontWeight={500}
-        fill="rgba(255,255,255,0.7)"
-      >
-        {formatValue(payload.value, payload.currency)}
-      </text>
+      {showContent && (
+        <>
+          {/* Pill — sized to content */}
+          <rect
+            x={x + barInset}
+            y={pillY}
+            width={Math.max(Math.min(pillWidth, width - barInset * 2), 0)}
+            height={pillHeight}
+            rx={6}
+            fill="rgba(255,255,255,0.2)"
+          />
+          {/* Count */}
+          <text
+            x={countX}
+            y={y + height / 2}
+            dominantBaseline="central"
+            fontSize={11}
+            fontWeight={700}
+            fill="white"
+          >
+            {countText}
+          </text>
+          {/* Value */}
+          <text
+            x={valueX}
+            y={y + height / 2}
+            dominantBaseline="central"
+            fontSize={10}
+            fontWeight={500}
+            fill="rgba(255,255,255,0.7)"
+          >
+            {formatValue(payload.value, payload.currency)}
+          </text>
+        </>
+      )}
     </g>
   );
 }
@@ -135,7 +141,12 @@ export function PipelineSummary() {
 
       {/* Chart */}
       <div className="mt-5 h-60">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+          minWidth={0}
+          minHeight={0}
+        >
           <BarChart
             data={chartData}
             layout="vertical"

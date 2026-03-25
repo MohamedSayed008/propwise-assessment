@@ -72,7 +72,12 @@ export function RevenueForecast() {
 
       {/* Chart */}
       <div className="mt-3 h-52">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+          minWidth={0}
+          minHeight={0}
+        >
           <AreaChart
             data={revenue.data}
             margin={{ top: 14, right: 0, bottom: 10, left: 8 }}
