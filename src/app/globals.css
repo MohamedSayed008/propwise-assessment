@@ -484,6 +484,9 @@
     @apply font-heading text-title-3 font-extrabold tracking-title;
   }
 
+  .type-leading-none-text-base-semibold {
+      @apply font-body text-label-lg font-semibold;
+  }
 
   .type-leading-none-text-sm-normal {
     @apply font-body text-body-sm font-normal;
