@@ -11,7 +11,7 @@ This project deliberately targets **Next.js 16 / React 19 / Tailwind CSS 4 / Rec
 - **Recharts output remains equivalent.** `AreaChart`, `BarChart`, `ResponsiveContainer`, and sparkline patterns are unchanged in Recharts 3. The component props and composition model are the same.
 - **Tailwind utility workflow and token discipline remain equivalent.** Tailwind v4 replaces `tailwind.config.ts` with `@theme inline` blocks in CSS. The utility-class workflow, arbitrary-value syntax, and responsive-prefix conventions are identical. The project benefits from v4's native CSS custom property integration, which aligns naturally with the semantic token architecture.
 
-No behavioral drift exists for the feature surface this project covers.
+No behavioral drift exists for the feature surface this project covers. The upgrade was chosen to use the latest stable releases while maintaining full spec compliance.
 
 ## Design Token System
 
@@ -94,8 +94,8 @@ Tailwind v4 maps logical-property utilities natively. This means setting `dir="r
 
 ## Charts
 
-- **Recharts** used for all charts: AreaChart (revenue), custom pipeline bars (framer-motion animated divs with proportional widths), and sparkline mini AreaCharts in KPI cards.
-- Pipeline bars use `framer-motion` for width animation rather than Recharts BarChart, as the Figma design shows a simple horizontal bar with labels that doesn't map cleanly to Recharts' BarChart API. The bars are proportional to the max stage value.
+- **Recharts** used for all charts: `AreaChart` (revenue forecast), `BarChart` (pipeline summary), and sparkline mini `AreaChart`s in KPI cards.
+- Pipeline summary uses a horizontal `BarChart` (`layout="vertical"`) with a custom `shape` component (`PipelineBar`) that renders the Figma pill (count + value badge) inside each bar. Bar animation is handled natively by Recharts (`animationDuration={800}`).
 
 ## Toast System
 
@@ -116,5 +116,5 @@ Tailwind v4 maps logical-property utilities natively. This means setting `dir="r
 ## Deviations from Spec
 
 - **No `atomWithQuery`**: The `jotai/utils` package doesn't export `atomWithQuery` in the installed version. Used a custom hook pattern instead.
-- **Pipeline uses motion divs instead of Recharts BarChart**: Provides better pixel-perfect control for the Figma design.
+- **Pipeline uses Recharts BarChart with custom shape**: A custom `PipelineBar` SVG shape renders the Figma pill (count + value badge inside the bar) while Recharts handles layout, axis rendering, and animation.
 - **Sidebar width 224px = w-56**: Used Tailwind's `w-56` (14rem = 224px) utility class.

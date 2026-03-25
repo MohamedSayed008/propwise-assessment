@@ -1,75 +1,121 @@
 # PropWise CRM Dashboard
 
-A pixel-perfect Next.js frontend implementing a real estate CRM dashboard from a Figma design specification.
+Frontend implementation of the PropWise CRM dashboard using Next.js App Router, TypeScript, Tailwind CSS v4, Jotai, Recharts, and Sonner.
 
-## Setup
+## Getting Started
+
+Install dependencies:
 
 ```bash
 npm install
-npm run dev      # Start dev server on localhost:3000
-npm run build    # Production build
-npm run lint     # ESLint check
 ```
 
-No environment variables are required. No backend — uses a mock API with simulated latency and ~5% failure rate.
+Start the development server:
 
-## Stack
-
-| Technology | Version | Purpose |
-|---|---|---|
-| Next.js | 16 (App Router) | Framework |
-| React | 19 | UI library |
-| TypeScript | 5 (strict, no `any`) | Type safety |
-| Tailwind CSS | 4 (`@theme inline`) | Styling via semantic design tokens |
-| shadcn/ui | Latest (Radix primitives) | UI component library |
-| Recharts | 3 | Charts (area, sparkline) |
-| Jotai | 2 | Atomic state management |
-| Framer Motion | Latest | Animations (tabs, pipeline bars) |
-| Sonner | Latest | Toast notifications (custom styled) |
-| next-themes | Latest | Dark mode |
-
-> **Intentional Compatibility Upgrade:** Next 16, React 19, Tailwind 4, and Recharts 3 were chosen deliberately. See [DECISIONS.md](./DECISIONS.md) for proof of no behavioral drift.
-
-## Rubric Alignment
-
-| Area | Points | Implementation |
-|---|---|---|
-| Design Fidelity | 25 | Full semantic token system (colors, shadows, radii, font sizes), Figma-exact base scales, zero hardcoded values |
-| Responsive Design | 15 | 7 custom breakpoints (380–2000px), mobile drawer, tablet grid, no Tailwind default breakpoints |
-| Charts & Data Viz | 15 | Recharts area chart with dual areas + gradient, animated pipeline bars (Framer Motion), animated sparklines |
-| Toast Notifications | 10 | Custom-styled Sonner matching Figma spec, 4 trigger types, undo/retry actions, single-toast display |
-| State Management | 15 | Jotai atoms + 5 derived atoms for render optimization, transactional period switching with rollback, URL sync |
-| Component Architecture | 10 | shadcn primitives, shared CheckboxCircle, custom icons from Figma, keyboard-navigable tabs, semantic HTML |
-| Code Quality | 10 | Strict TypeScript (no `any`), RTL-safe logical properties, clean file organization, zero lint warnings |
-
-## Architecture
-
-```
-src/
-├── app/              # App Router (layout, dashboard page)
-├── components/
-│   ├── ui/           # shadcn primitives (button, dropdown, drawer, etc.)
-│   ├── layout/       # Sidebar (224px fixed, shadcn Drawer on mobile)
-│   └── pages/dashboard/  # All dashboard section components
-├── icons/            # 12 custom Figma SVG icon components
-├── lib/              # Mock API (deterministic per-period data), utilities
-├── store/            # Jotai atoms (period, data, derived per-section)
-├── types/            # TypeScript interfaces
-└── hooks/            # useDashboard hook
+```bash
+npm run dev
 ```
 
-## Design System
+The app will be available at `http://localhost:3000`.
 
-- **Tokens:** All colors, shadows, radii, font sizes defined in `globals.css` `@theme inline`
-- **Breakpoints:** `mobile` (380), `tablet-s` (744), `tablet-m` (834), `desktop-s` (1280), `desktop-m` (1440), `desktop-l` (1680), `desktop-xl` (2000)
-- **RTL-safe:** All layout uses logical properties (`ps-`/`pe-`/`ms-`/`me-`/`start`/`end`)
-- **Dark mode:** Full dark token set with `next-themes` toggle
+Other useful commands:
 
-## Bonus Features
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-- Dark mode with design system dark alias tokens
-- Animated pipeline bar chart entrance (Framer Motion)
-- URL-synced active period (`?period=this_week`)
-- Keyboard navigation for date filter tabs (Arrow keys, RTL-aware)
-- Per-section skeleton loaders
-- Deterministic mock data per period (seeded PRNG)
+Notes:
+
+- No environment variables are required.
+- Data is provided through a local mock API layer in `src/lib/mock-api.ts`.
+- The main dashboard route is `/dashboard`.
+
+## Tech Stack
+
+| Technology | Version |
+| --- | --- |
+| Next.js | 16.2.1 |
+| React | 19.2.4 |
+| React DOM | 19.2.4 |
+| TypeScript | 5 |
+| Tailwind CSS | 4 |
+| Jotai | 2.18.1 |
+| Recharts | 3.8.0 |
+| Sonner | 2.0.7 |
+| next-themes | 0.4.6 |
+
+## Project Structure
+
+```text
+.
+├── public/
+│   ├── Avatar.png
+│   ├── Ellipse.png
+│   └── bg-ellipse.png
+├── src/
+│   ├── app/
+│   │   ├── dashboard/
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── layout/
+│   │   │   └── sidebar.tsx
+│   │   └── ui/
+│   │       ├── avatar.tsx
+│   │       ├── badge.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── checkbox-circle.tsx
+│   │       ├── drawer.tsx
+│   │       ├── dropdown-menu.tsx
+│   │       ├── progress.tsx
+│   │       ├── separator.tsx
+│   │       ├── skeleton.tsx
+│   │       ├── sonner.tsx
+│   │       └── tabs.tsx
+│   ├── hooks/
+│   │   └── use-dashboard.ts
+│   ├── icons/
+│   │   ├── calendar.tsx
+│   │   ├── contacts.tsx
+│   │   ├── dashboard.tsx
+│   │   ├── deals.tsx
+│   │   ├── inbox.tsx
+│   │   ├── leads.tsx
+│   │   ├── marketing.tsx
+│   │   ├── properties.tsx
+│   │   ├── reports.tsx
+│   │   ├── settings.tsx
+│   │   ├── tasks.tsx
+│   │   ├── team.tsx
+│   │   ├── icon.types.ts
+│   │   └── index.ts
+│   ├── lib/
+│   │   ├── mock-api.ts
+│   │   ├── mock-data.ts
+│   │   └── utils.ts
+│   ├── store/
+│   │   ├── dashboard.ts
+│   │   └── index.ts
+│   └── types/
+│       └── dashboard.ts
+├── DECISIONS.md
+└── package.json
+```
+
+## Implementation Notes
+
+- Styling is driven from semantic tokens and custom breakpoints defined in [src/app/globals.css](./src/app/globals.css).
+- Shared UI primitives live under [src/components/ui](./src/components/ui).
+- Dashboard state is managed with Jotai atoms in [src/store/dashboard.ts](./src/store/dashboard.ts).
+- Toast behavior is handled through the custom Sonner wrapper in [src/components/ui/sonner.tsx](./src/components/ui/sonner.tsx).
+- Routing and initial dashboard loading are handled in [src/app/dashboard/page.tsx](./src/app/dashboard/page.tsx).
+
+## Documents
+
+- [DECISIONS.md](./DECISIONS.md): implementation assumptions and technical decisions
